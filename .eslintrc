@@ -1,0 +1,9 @@
+{
+	"extends": "eslint-config-amanhimself",
+	"plugins": [
+			"module-resolver"
+		],
+	"rules": {
+			"module-resolver/use-alias": 2
+		}
+}
