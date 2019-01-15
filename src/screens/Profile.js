@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { Card, Button, Text } from "react-native-elements";
-import { onSignOut } from "../auth";
+import { onSignOut } from "utils/auth";
 
 export default ({ navigation }) => (
   <View style={{ paddingVertical: 20 }}>
