@@ -1,10 +1,10 @@
 import React from "react";
 import { View, StyleSheet, Image, KeyboardAvoidingView } from "react-native";
-import { Button, FormLabel, FormInput } from "react-native-elements";
+import { FormLabel, FormInput } from "react-native-elements";
 import { primaryGradientArray } from 'utils/Colors';
 import { LinearGradient } from 'expo';
 import { onSignIn } from "utils/auth";
-//import Button from 'components/Button/Button';
+import Button from 'components/Button';
 import styled from 'styled-components'
 const Logo = require('images/icon-white.png');
 
@@ -25,6 +25,13 @@ const StyledImage = styled.Image`
 `;
 
 const FormContainer = styled.View`
+`;
+
+const ButtonContainer = styled.View`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-vertical: 10;
 `;
 
 const Card = styled.View`
@@ -55,19 +62,19 @@ export default ({ navigation }) => (
 				<FormLabel>Confirm Password</FormLabel>
 				<FormInput secureTextEntry placeholder="Confirm Password..." />
 
-				<Button
+				{/*	<Button
 					title="Create Account"
+					onPress={() => navigation.navigate("SignIn")}
+				/>
+				*/}
+				<ButtonContainer>
+				<Button
+					label="Sign Up"
 					onPress={() => {
 						onSignIn().then(() => navigation.navigate("SignedIn"));
 					}}
 				/>
-				<Button
-					buttonStyle={{ marginTop: 20 }}
-					backgroundColor="transparent"
-					textStyle={{ color: "#bcbec1" }}
-					title="Sign In"
-					onPress={() => navigation.navigate("SignIn")}
-				/>
+			</ButtonContainer>
 			</Card>
 		</FormContainer>
 
