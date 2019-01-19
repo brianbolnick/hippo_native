@@ -20,14 +20,10 @@ export default ({ navigation }) => (
 					<FormInput placeholder="Email address..." />
 					<FormLabel>Password</FormLabel>
 					<FormInput secureTextEntry placeholder="Password..." />
-					<FormLabel>Confirm Password</FormLabel>
-					<FormInput secureTextEntry placeholder="Confirm Password..." />
 					<ButtonContainer>
 						<Button
-							label="Sign Up"
-							onPress={() => {
-								onSignIn().then(() => navigation.navigate("SignedIn"));
-							}}
+							label="Sign In"
+							onPress={() => onSignIn().then(() => navigation.navigate("SignedIn"))}
 						/>
 					</ButtonContainer>
 				</Card>

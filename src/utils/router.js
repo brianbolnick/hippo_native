@@ -7,9 +7,9 @@ import {
 	createAppContainer
 } from "react-navigation";
 import { FontAwesome } from '@expo/vector-icons';
-
-import SignUp from "screens/SignUp";
-import SignIn from "screens/SignIn";
+import SignUp from "screens/Auth/SignUp";
+import Welcome from "screens/Welcome";
+import SignIn from "screens/Auth/SignIn";
 import Home from "screens/Home";
 import Profile from "screens/Profile";
 
@@ -18,6 +18,13 @@ const headerStyle = {
 };
 
 export const SignedOut = createStackNavigator({
+	Welcome: {
+		screen: Welcome, 
+		navigationOptions: {
+			headerStyle,
+			headerTransparent: true
+		}
+	},
 	SignUp: {
 		screen: SignUp,
 		navigationOptions: {
