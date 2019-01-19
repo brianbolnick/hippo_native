@@ -23,8 +23,8 @@ export const offWhite = "#ECEDEE";
 // Grays
 export const darkGray = "#848586";
 export const lightGray = "#E8E9EB";
-export const mutedGray = "rgb(0,0,0,.15)";
-export const offGray = "rgb(0,0,0,.30)";
+export const mutedGray = "rgba(0,0,0,.15)";
+export const offGray = "rgba(0,0,0,.30)";
 
 //Reds
 export const red = "#FE4969";

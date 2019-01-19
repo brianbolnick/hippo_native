@@ -8,6 +8,7 @@ import {
 } from "react-navigation";
 import { FontAwesome } from '@expo/vector-icons';
 import SignUp from "screens/Auth/SignUp";
+import FamilyCodeIntro from "screens/Auth/FamilyCodeIntro";
 import Welcome from "screens/Welcome";
 import SignIn from "screens/Auth/SignIn";
 import Home from "screens/Home";
@@ -25,18 +26,27 @@ export const SignedOut = createStackNavigator({
 			headerTransparent: true
 		}
 	},
-	SignUp: {
-		screen: SignUp,
+	FamilyCodeIntro: {
+		screen: FamilyCodeIntro, 
 		navigationOptions: {
 			headerStyle,
 			headerTransparent: true
 		}
 	},
+	SignUp: {
+		screen: SignUp,
+		navigationOptions: {
+			headerStyle,
+			headerTransparent: true,
+			headerLeft: null
+		}
+	},
 	SignIn: {
 		screen: SignIn,
 		navigationOptions: {
-			title: "Sign In",
-			headerStyle
+			headerStyle,
+			headerTransparent: true,
+			headerLeft: null
 		}
 	}
 });
