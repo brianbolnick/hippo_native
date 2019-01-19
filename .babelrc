@@ -5,7 +5,9 @@
       "plugins": [
         "transform-react-jsx-source",
         ["module-resolver", {
-          "root": ["./src"]
+          "root": ["./src"],
+					"extensions": [".ios.js", ".android.js", ".js", ".json"],
+					 “@hippo_native/app”: “./build/app/src”
         }]
       ]
     }
