@@ -7,6 +7,7 @@ import {
 	createAppContainer
 } from "react-navigation";
 import { FontAwesome } from '@expo/vector-icons';
+import Icon from 'components/Icon/Icon';
 import SignUp from "screens/Auth/SignUp";
 import FamilyCodeIntro from "screens/Auth/FamilyCodeIntro";
 import FamilyCodeNew from "screens/Auth/FamilyCodeNew";
@@ -15,6 +16,7 @@ import Welcome from "screens/Welcome";
 import SignIn from "screens/Auth/SignIn";
 import Home from "screens/Home";
 import Profile from "screens/Profile";
+import * as colors from 'utils/Colors';
 
 const headerStyle = {
 	marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
@@ -70,12 +72,21 @@ export const SignedOut = createStackNavigator({
 
 export const SignedIn = createBottomTabNavigator(
 	{
-		Home: {
+		Recipes: {
 			screen: Home,
 			navigationOptions: {
-				tabBarLabel: "Home",
+				tabBarLabel: "Recipes",
 				tabBarIcon: ({ tintColor }) => (
-					<FontAwesome name="home" size={30} color={tintColor} />
+					<Icon name="utensils" size={24} color={tintColor} />
+				)
+			}
+		},
+		Create: {
+			screen: Profile,
+			navigationOptions: {
+				tabBarLabel: "Create", 
+				tabBarIcon: ({ tintColor }) => (
+					<Icon name="plus" size={24} color={tintColor} />
 				)
 			}
 		},
@@ -84,7 +95,7 @@ export const SignedIn = createBottomTabNavigator(
 			navigationOptions: {
 				tabBarLabel: "Profile", 
 				tabBarIcon: ({ tintColor }) => (
-					<FontAwesome name="user" size={30} color={tintColor} />
+					<Icon name="user" size={24} color={tintColor} />
 				)
 			}
 		}
@@ -92,8 +103,13 @@ export const SignedIn = createBottomTabNavigator(
 	{
 		tabBarOptions: {
 			style: {
-				paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
-			}
+				paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 10,
+			},
+			activeTintColor: colors.red,
+			labelStyle: {
+				fontSize: 12,
+			},
+			showLabel: false
 		}
 	}
 );
