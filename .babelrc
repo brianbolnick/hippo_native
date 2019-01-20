@@ -2,14 +2,18 @@
   "presets": ["babel-preset-expo"],
   "env": {
     "development": {
-      "plugins": [
-        "transform-react-jsx-source",
-        ["module-resolver", {
-          "root": ["./src"],
-					"extensions": [".ios.js", ".android.js", ".js", ".json"],
-					 “@hippo_native/app”: “./build/app/src”
-        }]
-      ]
+      "plugins": ["transform-react-jsx-source"]
     }
-  }
+  },
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "@components": "./src/components",
+        "@utils": "./src/utils",
+        "@screens": "./src/screens",
+        "@images": "./app/images"
+      }
+    }]
+  ]
 }
