@@ -14,7 +14,7 @@ import FamilyCodeNew from "screens/Auth/FamilyCodeNew";
 import FamilyCodeExisting from "screens/Auth/FamilyCodeExisting";
 import Welcome from "screens/Welcome";
 import SignIn from "screens/Auth/SignIn";
-import Home from "screens/Home";
+import RecipeList from "screens/Recipes/RecipeList";
 import Profile from "screens/Profile";
 import * as colors from 'utils/Colors';
 
@@ -73,7 +73,7 @@ export const SignedOut = createStackNavigator({
 export const SignedIn = createBottomTabNavigator(
 	{
 		Recipes: {
-			screen: Home,
+			screen: RecipeList,
 			navigationOptions: {
 				tabBarLabel: "Recipes",
 				tabBarIcon: ({ tintColor }) => (

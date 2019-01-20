@@ -1,9 +1,33 @@
 {
-	"extends": "eslint-config-amanhimself",
-	"plugins": [
-			"module-resolver"
-		],
+	"extends": [
+		"react-app",
+		"airbnb",
+		"prettier",
+		"prettier/react"
+	],
 	"rules": {
-			"module-resolver/use-alias": 2
+		"react/jsx-filename-extension": [
+			1,
+		{
+			"extensions": [
+				".js",
+			".jsx"
+			]
 		}
+		],
+		"prettier/prettier": [
+			"error",
+		{
+			"trailingComma": "es5",
+			"singleQuote": true,
+			"printWidth": 100
+		}
+		]
+	},
+	"plugins": [
+		"prettier"
+	],
+	"import/resolver": {
+		"babel-module": {}
+	}
 }
