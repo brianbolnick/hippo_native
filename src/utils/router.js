@@ -9,6 +9,8 @@ import {
 import { FontAwesome } from '@expo/vector-icons';
 import SignUp from "screens/Auth/SignUp";
 import FamilyCodeIntro from "screens/Auth/FamilyCodeIntro";
+import FamilyCodeNew from "screens/Auth/FamilyCodeNew";
+import FamilyCodeExisting from "screens/Auth/FamilyCodeExisting";
 import Welcome from "screens/Welcome";
 import SignIn from "screens/Auth/SignIn";
 import Home from "screens/Home";
@@ -33,6 +35,21 @@ export const SignedOut = createStackNavigator({
 			headerTransparent: true
 		}
 	},
+	FamilyCodeNew: {
+		screen: FamilyCodeNew, 
+		navigationOptions: {
+			headerStyle,
+			headerTransparent: true
+		}
+	},
+	FamilyCodeExisting: {
+		screen: FamilyCodeExisting, 
+		navigationOptions: {
+			headerStyle,
+			headerTransparent: true
+		}
+	},
+
 	SignUp: {
 		screen: SignUp,
 		navigationOptions: {
@@ -81,8 +98,7 @@ export const SignedIn = createBottomTabNavigator(
 	}
 );
 
-export const createRootNavigator = (signedIn = false) => {
-	return createAppContainer(createSwitchNavigator(
+export const createRootNavigator = (signedIn = false) => createAppContainer(createSwitchNavigator(
 		{
 			SignedIn: {
 				screen: SignedIn
@@ -95,4 +111,3 @@ export const createRootNavigator = (signedIn = false) => {
 			initialRouteName: signedIn ? "SignedIn" : "SignedOut"
 		}
 	));
-};

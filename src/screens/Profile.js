@@ -1,11 +1,12 @@
 import React from "react";
 import { View } from "react-native";
-import { Card, Button, Text } from "react-native-elements";
+import { Card, Text } from "react-native-elements";
+import Button from 'components/Button'
 import { onSignOut } from "utils/auth";
 
 export default ({ navigation }) => (
   <View style={{ paddingVertical: 20 }}>
-    <Card title="John Doe">
+    <Card title="Fake Person">
       <View
         style={{
           backgroundColor: "#bcbec1",
@@ -18,11 +19,10 @@ export default ({ navigation }) => (
           marginBottom: 20
         }}
       >
-        <Text style={{ color: "white", fontSize: 28 }}>JD</Text>
+        <Text style={{ color: "white", fontSize: 28 }}>AB</Text>
       </View>
       <Button
-        backgroundColor="#03A9F4"
-        title="SIGN OUT"
+        label="SIGN OUT"
         onPress={() => onSignOut().then(() => navigation.navigate("SignedOut"))}
       />
     </Card>

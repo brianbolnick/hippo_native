@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components'
 import { View, StyleSheet, Image, KeyboardAvoidingView } from "react-native";
-import  * as colors from 'utils/Colors';
+import * as colors from 'utils/Colors';
 
 export const LogoContainer = styled.View`
 	align-items: center;
@@ -19,7 +19,7 @@ export const ButtonContainer = styled.View`
 	width: 300;
 `;
 
-export const ScreenContainer = styled.KeyboardAvoidingView `
+export const ScreenContainer = styled.View `
 	flex: 1;
 	padding-vertical: 50;
 	padding-horizontal: 24;
@@ -31,10 +31,10 @@ export const Card = styled.View`
 	width: 100%;
 	margin-top: 40;
 	border-radius: 5;
-  shadow-opacity: 0.3;
+  shadow-opacity: 0.2;
   shadow-radius: 10px;
   shadow-color: black;
-  shadow-offset: 0px 15px;
+  shadow-offset: 0px 10px;
 	padding-vertical: 40;
 	padding-horizontal: 8;
 `;

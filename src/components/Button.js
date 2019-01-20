@@ -38,7 +38,7 @@ const ButtonText = styled.Text`
 `;
 
 const Button = ({ onPress, label, textColor, backgroundColor, secondary, tertiary, ...rest }) => (
-	<StyledOpacity onPress={onPress} secondary={secondary} tertiary={tertiary}>
+	<StyledOpacity onPress={onPress} secondary={secondary} tertiary={tertiary} underlayColor={tertiary ? 'transparent' : colors.mutedGray}>
 		<LinearGradient
 			colors={(secondary || tertiary) ? [] : colors.primaryGradientArray}
 			start={{x: 0.0, y: 1.0}} end={{x: 1.0, y: 1.0}}

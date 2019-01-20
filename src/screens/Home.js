@@ -1,31 +1,32 @@
 import React from "react";
 import { ScrollView, Text, Linking, View } from "react-native";
-import { Card, Button } from "react-native-elements";
+import { Card } from "react-native-elements";
+import Button from 'components/Button'
 
 const images = [
   {
     key: 1,
-    name: "Nathan Anderson",
+    name: "Pizza",
     image: require("../images/1.jpg"),
-    url: "https://unsplash.com/photos/C9t94JC4_L8"
+    url: "https://hungryhippo.app"
   },
   {
     key: 2,
-    name: "Jamison McAndie",
+    name: "Tacos",
     image: require("../images/2.jpg"),
-    url: "https://unsplash.com/photos/waZEHLRP98s"
+    url: "https://hungryhippo.app"
   },
   {
     key: 3,
-    name: "Alberto Restifo",
+    name: "Carbonara",
     image: require("../images/3.jpg"),
-    url: "https://unsplash.com/photos/cFplR9ZGnAk"
+    url: "https://hungryhippo.app"
   },
   {
     key: 4,
-    name: "John Towner",
+    name: "Waffles",
     image: require("../images/4.jpg"),
-    url: "https://unsplash.com/photos/89PFnHKg8HE"
+    url: "https://hungryhippo.app"
   }
 ];
 
@@ -33,13 +34,12 @@ export default ({navigation}) => (
   <View style={{ flex: 1 }}>
     <ScrollView contentContainerStyle={{ paddingVertical: 20 }}>
       {images.map(({ name, image, url, key }) => (
-        <Card title={`CARD ${key}`} image={image} key={key}>
+        <Card title="FAKE STUFF!" image={image} key={key}>
           <Text style={{ marginBottom: 10 }}>
-            Photo by {name}.
+            {name}
           </Text>
           <Button
-            backgroundColor="#03A9F4"
-            title="VIEW NOW"
+            label="VIEW NOW"
             onPress={() => Linking.openURL(url)}
           />
         </Card>

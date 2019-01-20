@@ -1,19 +1,16 @@
 {
   "presets": ["babel-preset-expo"],
-  "env": {
-    "development": {
-      "plugins": ["transform-react-jsx-source"]
-    }
-  },
   "plugins": [
     ["module-resolver", {
       "root": ["./src"],
       "alias": {
-        "@components": "./src/components",
-        "@utils": "./src/utils",
-        "@screens": "./src/screens",
-        "@images": "./app/images"
-      }
+        "screens": "./src/screens",
+        "components": "./src/components",
+        "images": "./src/images",
+        "utils": "./src/utils",
+				"src": "./src"
+      },
+      "extensions": [".js"]
     }]
   ]
 }
