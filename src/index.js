@@ -1,6 +1,7 @@
 import React from "react";
 import { createRootNavigator } from "utils/router";
 import { isSignedIn } from "utils/auth";
+import { Font } from 'expo';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -8,11 +9,19 @@ export default class App extends React.Component {
 
     this.state = {
       signedIn: false,
-      checkedSignIn: false
+			checkedSignIn: false,
+			fontLoaded: false
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    await Font.loadAsync({
+			'rufina': require('../assets/fonts/Rufina-Regular.ttf'),
+			'rufina-bold': require('../assets/fonts/Rufina-Bold.ttf'),
+    });
+
+		this.setState({fontLoaded: true})
+
     isSignedIn()
       .then(res => this.setState({ signedIn: res, checkedSignIn: true }))
       .catch(err => alert("An error occurred"));

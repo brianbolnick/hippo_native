@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, Image, KeyboardAvoidingView } from "react-nativ
 import { FormLabel, FormInput } from "react-native-elements";
 import * as colors from 'utils/Colors';
 import { LinearGradient } from 'expo';
-//import Image from 'react-native-remote-svg'
 import { onSignIn } from "utils/auth";
 import Button from 'components/Button';
 import styled from 'styled-components'
