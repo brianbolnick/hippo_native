@@ -11,12 +11,13 @@ import {
 } from "./RecipeCardStyledComponents";
 import Button from "components/Button";
 
-const RecipeCard = ({ data }) => {
+const RecipeCard = ({ data, navigation }) => {
   const { title, image_url, id, category, user } = data;
+  console.log(navigation);
   return (
     <Card
       underlayColor="transparent"
-      onPress={() => Linking.openURL("https://hungryhippo.app")}
+      onPress={() => navigation.navigate("ShowRecipe", { data })}
     >
       <View style={{ borderRadius: 4 }}>
         <RecipeImage source={{ uri: image_url }} />

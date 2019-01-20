@@ -16,6 +16,8 @@ import Welcome from "screens/Welcome";
 import SignIn from "screens/Auth/SignIn";
 import RecipeList from "screens/Recipes/RecipeList";
 import NewRecipe from "screens/Recipes/NewRecipe";
+import Temp from "screens/Recipes/Temp";
+import ShowRecipe from "screens/Recipes/ShowRecipe";
 import Profile from "screens/Profile";
 import * as colors from "utils/Colors";
 
@@ -70,6 +72,50 @@ export const SignedOut = createStackNavigator({
   }
 });
 
+export const Recipe = createBottomTabNavigator(
+  {
+    RateRecipe: {
+      screen: Temp,
+      navigationOptions: {
+        tabBarLabel: "Rate",
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="star" size={24} color={tintColor} />
+        )
+      }
+    },
+    ShowRecipe: {
+      screen: ShowRecipe,
+      navigationOptions: {
+        tabBarLabel: "Recipe",
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="utensils" size={24} color={tintColor} />
+        )
+      }
+    },
+    ShareRecipe: {
+      screen: Temp,
+      navigationOptions: {
+        tabBarLabel: "Share",
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="share" size={24} color={tintColor} />
+        )
+      }
+    }
+  },
+  {
+    tabBarOptions: {
+      style: {
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 10
+      },
+      activeTintColor: colors.red,
+      labelStyle: {
+        fontSize: 12
+      },
+      showLabel: false
+    }
+  }
+);
+
 export const SignedIn = createBottomTabNavigator(
   {
     Recipes: {
@@ -77,7 +123,7 @@ export const SignedIn = createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: "Recipes",
         tabBarIcon: ({ tintColor }) => (
-          <Icon name="utensils" size={24} color={tintColor} />
+          <Icon name="book" size={24} color={tintColor} />
         )
       }
     },
@@ -123,6 +169,9 @@ export const createRootNavigator = (signedIn = false) =>
         },
         SignedOut: {
           screen: SignedOut
+        },
+        Recipe: {
+          screen: Recipe
         }
       },
       {

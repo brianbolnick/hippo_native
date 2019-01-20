@@ -19,7 +19,6 @@ const StyledText = styled.Text`
   font-size: 32px;
   color: ${colors.black};
   font-weight: 800;
-  margin-vertical: 30;
 `;
 
 const LogoContainer = styled.View`
@@ -45,7 +44,6 @@ const ButtonContainer = styled.View`
 const Card = styled.View`
   width: 325;
   margin-top: 40;
-  border-radius: 5;
 `;
 
 const StyledButton = styled(Button)`
@@ -58,9 +56,9 @@ export default ({ navigation }) => (
       <Image
         resizeMode="contain"
         source={Logo}
-        style={{ width: 200, height: 200 }}
+        style={{ width: 225, height: 225, marginBottom: -25 }}
       />
-      <StyledText>Recipes made simple</StyledText>
+      <StyledText>Recipes made simple.</StyledText>
     </LogoContainer>
     <FormContainer>
       <Card>
