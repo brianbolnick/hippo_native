@@ -1,11 +1,11 @@
-export const lightWhite = '#fcefe9';
-export const inputPlaceholder = '#f1a895';
-export const lighterWhite = '#f4e4e2';
-export const circleInactive = '#ecbfbe';
-export const circleActive = '#90ee90';
-export const itemListText = '#555555';
-export const itemListTextStrike = '#c4c4cc';
-export const deleteIconColor = '#bc2e4c';
+//export const lightWhite = '#fcefe9';
+//export const inputPlaceholder = '#f1a895';
+//export const lighterWhite = '#f4e4e2';
+//export const circleInactive = '#ecbfbe';
+//export const circleActive = '#90ee90';
+//export const itemListText = '#555555';
+//export const itemListTextStrike = '#c4c4cc';
+//export const deleteIconColor = '#bc2e4c';
 
 //Yellows
 export const yellow = "#F9DC5C";
@@ -23,6 +23,7 @@ export const offWhite = "#ECEDEE";
 // Grays
 export const darkGray = "#848586";
 export const lightGray = "#E8E9EB";
+export const veryLightGray = "rgba(0, 0, 0, 0.05)";
 export const mutedGray = "rgba(0,0,0,.15)";
 export const offGray = "rgba(0,0,0,.30)";
 
@@ -41,7 +42,7 @@ export const green = "#59CD90";
 export const darkGreen = "#49A876";
 
 //Gradients
-const primaryStart = '#f0617d';
+const primaryStart = "#f0617d";
 const primaryEnd = red;
 export const primaryGradientArray = [primaryStart, primaryEnd];
 export const secondaryGradientArray = [blue, darkBlue];
@@ -59,9 +60,10 @@ export default {
   lightGray,
   mutedGray,
   offGray,
+  veryLightGray,
   offWhite,
   orange,
-	primaryGradientArray,
+  primaryGradientArray,
   red,
   white,
   yellow

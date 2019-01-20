@@ -22,7 +22,7 @@ const images = [
     servings: 4,
     prep_time: "5 Mins",
     original_family_id: 1,
-    notes: "So good!",
+    notes: "",
     is_public: false,
     ingredients: ["Salt", "Pepper"],
     image_url:
@@ -46,7 +46,10 @@ const images = [
       id: 1
     },
     title: "Spaghetti Carbonara",
-    steps: ["Cook Food", "Eat Food"],
+    steps: [
+      "Cook Food with a lot of other stuff and this is a really long step to see what happens with you have a lot of text",
+      "Eat Food"
+    ],
     servings: 4,
     prep_time: "5 Mins",
     original_family_id: 1,
@@ -126,19 +129,25 @@ const images = [
   }
 ];
 
-export default ({ navigation }) => (
-  <View style={{ flex: 1, paddingTop: 50 }}>
-    <ScrollView
-      contentContainerStyle={{
-        flexDirection: "row",
-        flexWrap: "wrap",
-        alignItems: "center",
-        justifyContent: "center"
-      }}
-    >
-      {images.map(data => (
-        <RecipeCard data={data} key={data.id} navigation={navigation} />
-      ))}
-    </ScrollView>
-  </View>
-);
+export default ({ navigation }) => {
+  const renderCards = () => {
+    return images.map(data => (
+      <RecipeCard data={data} key={data.id} navigation={navigation} />
+    ));
+  };
+
+  return (
+    <View style={{ flex: 1, paddingTop: 50 }}>
+      <ScrollView
+        contentContainerStyle={{
+          flexDirection: "row",
+          flexWrap: "wrap",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        {renderCards()}
+      </ScrollView>
+    </View>
+  );
+};
