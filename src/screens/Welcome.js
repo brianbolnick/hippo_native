@@ -8,13 +8,13 @@ import { onSignIn } from "utils/auth";
 import Button from 'components/Button';
 import styled from 'styled-components'
 
-const Logo = require('images/hippo-text.jpg');
+const Logo = require('images/hippo-logo-3.png');
 
 const StyledText = styled.Text`
-	font-size: 24px;
+	font-size: 32px;
 	color: ${colors.black};
-	font-weight: 400;
-	margin-vertical: 24;
+	font-weight: 800;
+	margin-vertical: 30;
 `;
 
 const LogoContainer = styled.View`
@@ -51,7 +51,7 @@ const StyledButton = styled(Button)`
 export default ({ navigation }) => (
 		<ScreenContainer behavior="padding" style={styles.container}>
 			<LogoContainer>
-				<Image resizeMode="contain" source={Logo} style={{ width: 400, height: 200 }}/>
+				<Image resizeMode="contain" source={Logo} style={{ width: 200, height: 200 }}/>
 				<StyledText>Recipes made simple</StyledText>
 			</LogoContainer>
 			<FormContainer>
