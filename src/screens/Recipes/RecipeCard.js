@@ -9,11 +9,9 @@ import {
   MetaData,
   Footer
 } from "./RecipeCardStyledComponents";
-import Button from "components/Button";
 
 const RecipeCard = ({ data, navigation }) => {
   const { title, image_url, id, category, user } = data;
-  console.log(navigation);
   return (
     <Card
       underlayColor="transparent"
@@ -22,7 +20,9 @@ const RecipeCard = ({ data, navigation }) => {
       <View style={{ borderRadius: 4 }}>
         <RecipeImage source={{ uri: image_url }} />
         <Content>
-          <Title>{title}</Title>
+          <Title numberOfLines={1} ellipsizeMode="tail">
+            {title}
+          </Title>
           <MetaData>{category.name.toUpperCase()}</MetaData>
         </Content>
         <Footer>

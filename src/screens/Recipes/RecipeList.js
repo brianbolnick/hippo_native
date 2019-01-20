@@ -45,7 +45,7 @@ const images = [
       name: "Brian Bolnick",
       id: 1
     },
-    title: "Carbonara",
+    title: "Spaghetti Carbonara",
     steps: ["Cook Food", "Eat Food"],
     servings: 4,
     prep_time: "5 Mins",

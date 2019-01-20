@@ -11,6 +11,9 @@ import {
 import * as colors from "utils/Colors";
 import Button from "components/Button";
 import Icon from "components/Icon/Icon";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { addRecipe } from "utils/actions";
 
 const HeaderContainer = styled.View`
   height: 48;
@@ -34,6 +37,11 @@ const RecipeCategory = styled.Text`
 `;
 
 class ShowRecipe extends React.Component {
+  componentDidMount = () => {
+    const data = this.props.navigation.getParam("data", {});
+    this.props.addRecipe(data);
+  };
+
   render() {
     const { navigation } = this.props;
     const data = navigation.getParam("data", {});
@@ -43,7 +51,7 @@ class ShowRecipe extends React.Component {
           <Icon
             onPress={() => navigation.navigate("Recipes")}
             name="chevronLeft"
-            size={32}
+            size={40}
             color={colors.red}
           />
         </HeaderContainer>
@@ -66,4 +74,10 @@ class ShowRecipe extends React.Component {
   }
 }
 
-export default ShowRecipe;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ addRecipe }, dispatch);
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(ShowRecipe);

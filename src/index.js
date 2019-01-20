@@ -2,6 +2,19 @@ import React from "react";
 import { createRootNavigator } from "utils/router";
 import { isSignedIn } from "utils/auth";
 import { Font } from "expo";
+import axios from "axios";
+import axiosMiddleware from "redux-axios-middleware";
+import { API_URL } from "utils/constants";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import reducer from "utils/reducers";
+
+const client = axios.create({
+  baseURL: API_URL,
+  responseType: "json"
+});
+
+const store = createStore(reducer, applyMiddleware(axiosMiddleware(client)));
 
 export default class App extends React.Component {
   constructor(props) {
@@ -36,6 +49,10 @@ export default class App extends React.Component {
     }
 
     const Layout = createRootNavigator(signedIn);
-    return <Layout />;
+    return (
+      <Provider store={store}>
+        <Layout />
+      </Provider>
+    );
   }
 }
