@@ -1,13 +1,12 @@
 import React from "react";
-import { createRootNavigator } from "utils/router";
-import { isSignedIn } from "utils/auth";
 import { Font } from "expo";
 import axios from "axios";
 import axiosMiddleware from "redux-axios-middleware";
-import { API_URL } from "utils/constants";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
+import { API_URL, isSignedIn } from "utils";
 import reducer from "utils/reducers";
+import { createRootNavigator } from "utils/router";
 
 const client = axios.create({
   baseURL: API_URL,

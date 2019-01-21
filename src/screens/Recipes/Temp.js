@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import {
   Image,
   View,
@@ -9,11 +11,9 @@ import {
   Text
 } from "react-native";
 import * as colors from "utils/Colors";
-import Button from "components/Button";
-import Icon from "components/Icon/Icon";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import { addRecipe } from "utils/actions";
+import Button from "components/Button";
+import Icon from "components/Icon";
 
 const HeaderContainer = styled.View`
   height: 48;

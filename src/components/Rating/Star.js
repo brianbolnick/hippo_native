@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { Svg } from "expo";
 import PropTypes from "prop-types";
 import * as colors from "utils/Colors";
-import { Svg } from "expo";
 
 const { Path, G } = Svg;
 

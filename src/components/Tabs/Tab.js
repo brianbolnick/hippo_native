@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { View, TouchableHighlight } from "react-native";
+import { TouchableHighlight } from "react-native";
 import * as colors from "utils/Colors";
 
 const StyledTab = styled.TouchableHighlight`

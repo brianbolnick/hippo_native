@@ -1,11 +1,5 @@
 import styled from "styled-components";
-import {
-  Image,
-  View,
-  ScrollView,
-  TouchableHighlight,
-  Text
-} from "react-native";
+import { View, Text } from "react-native";
 import * as colors from "utils/Colors";
 
 export const HeaderContainer = styled.View`

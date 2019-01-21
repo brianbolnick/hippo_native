@@ -3,16 +3,14 @@ import {
   Text,
   View,
   StyleSheet,
-  Image,
   KeyboardAvoidingView,
   Linking
 } from "react-native";
 import { FormLabel, FormInput } from "react-native-elements";
-import * as colors from "utils/Colors";
-import { LinearGradient } from "expo";
-import { onSignIn } from "utils/auth";
-import Button from "components/Button";
 import styled from "styled-components";
+import { LinearGradient } from "expo";
+import * as colors from "utils/Colors";
+import Button from "components/Button";
 
 const Logo = require("images/hippo-logo-3.png");
 
@@ -88,29 +86,5 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
     alignItems: "center",
     justifyContent: "space-around"
-  },
-  centered: {
-    alignItems: "center"
-  },
-  inputContainer: {
-    marginTop: 40,
-    paddingLeft: 15
-  },
-  list: {
-    flex: 1,
-    marginTop: 70,
-    paddingLeft: 15,
-    marginBottom: 10
-  },
-  scrollableList: {
-    marginTop: 15
-  },
-  column: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
-  deleteAllButton: {
-    marginRight: 40
   }
 });

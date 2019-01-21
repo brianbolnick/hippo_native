@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import Star from "./Star";
 import { View, Text, TouchableOpacity } from "react-native";
+import Star from "./Star";
 
 const RatingContainer = styled.View`
   flex-direction: row;

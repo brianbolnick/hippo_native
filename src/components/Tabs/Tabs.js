@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { View } from "react-native";
 import TabPane from "./TabPane";
 import Tab from "./Tab";
-import { ScrollView, Text, Linking, View } from "react-native";
 
 class Tabs extends Component {
   state = {

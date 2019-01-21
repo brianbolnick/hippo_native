@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { View, StyleSheet, Image, KeyboardAvoidingView } from "react-native";
+import { View, Text } from "react-native";
 import * as colors from "utils/Colors";
 
 export const LogoContainer = styled.View`
@@ -58,34 +58,3 @@ export const ErrorText = styled.Text`
   margin-vertical: 16;
   color: ${colors.red};
 `;
-
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 40
-  },
-  centered: {
-    alignItems: "center"
-  },
-  inputContainer: {
-    marginTop: 40,
-    paddingLeft: 15
-  },
-  list: {
-    flex: 1,
-    marginTop: 70,
-    paddingLeft: 15,
-    marginBottom: 10
-  },
-  scrollableList: {
-    marginTop: 15
-  },
-  column: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between"
-  },
-  deleteAllButton: {
-    marginRight: 40
-  }
-});

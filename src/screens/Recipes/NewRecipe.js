@@ -1,14 +1,5 @@
 import React from "react";
-import { ScrollView, Text, Linking, View } from "react-native";
-import {
-  FooterText,
-  Card,
-  RecipeImage,
-  Content,
-  Title,
-  MetaData,
-  Footer
-} from "./RecipeCardStyledComponents";
+import { ScrollView, Text, View } from "react-native";
 
 export default ({ navigation }) => (
   <View style={{ flex: 1, paddingTop: 50 }}>

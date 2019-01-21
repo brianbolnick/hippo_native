@@ -6,8 +6,9 @@ import {
   createSwitchNavigator,
   createAppContainer
 } from "react-navigation";
-import { FontAwesome } from "@expo/vector-icons";
-import Icon from "components/Icon/Icon";
+import Icon from "components/Icon";
+import * as colors from "utils/Colors";
+
 import SignUp from "screens/Auth/SignUp";
 import FamilyCodeIntro from "screens/Auth/FamilyCodeIntro";
 import FamilyCodeNew from "screens/Auth/FamilyCodeNew";
@@ -21,7 +22,6 @@ import NewRecipe from "screens/Recipes/NewRecipe";
 import Temp from "screens/Recipes/Temp";
 import ShowRecipe from "screens/Recipes/ShowRecipe";
 import Profile from "screens/Profile";
-import * as colors from "utils/Colors";
 
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0

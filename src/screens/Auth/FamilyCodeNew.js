@@ -1,8 +1,8 @@
 import React from "react";
-import { FormLabel, FormInput } from "react-native-elements";
+import axios from "axios";
+import { View, KeyboardAvoidingView } from "react-native";
+import { onSignIn, API_URL, handleNetworkErrors } from "utils";
 import Input from "components/Input";
-import { View, StyleSheet, Image, KeyboardAvoidingView } from "react-native";
-import { onSignIn } from "utils/auth";
 import Button from "components/Button";
 import {
   ButtonContainer,
@@ -13,9 +13,7 @@ import {
   SubHeader,
   ErrorText
 } from "./AuthStyledComponents";
-import { getRecipeArgs } from "./helper";
-import axios from "axios";
-import { API_URL, handleNetworkErrors } from "utils/constants";
+//import { getRecipeArgs } from "./helper";
 
 const config = { headers: {} };
 

@@ -1,11 +1,11 @@
 import React from "react";
+import styled from "styled-components";
+import PropTypes from "prop-types";
 import Modal from "components/common/Modal/Modal";
 import ModalInput from "components/common/ModalInput/ModalInput";
 import Button from "components/common/Button/Button";
-import styled from "styled-components";
 import Star from "./Star";
-import PropTypes from "prop-types";
-import { media, varela, colors } from "styles/css-variables";
+import * as colors from "styles/Colors";
 //import { API_URL, token, userId, familyId } from "utils";
 //import axios from "axios";
 
@@ -22,7 +22,6 @@ const RatingContainer = styled.div`
 
 const Error = styled.div`
   color: ${colors.red};
-  font-family: ${varela};
   position: absolute;
   bottom: -14px;
   left: calc(50% - 181px);
@@ -66,7 +65,6 @@ const ButtonContainer = styled.div`
 `;
 
 const ModalText = styled.div`
-  font-family: ${varela};
   font-weight: 600;
   margin: 16px;
   position: relative;

@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "components/Button";
-import Icon from "components/Icon/Icon";
-import Rating from "components/Rating/Rating";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { addRecipe } from "utils/actions";
 import { Image, View, ScrollView } from "react-native";
+import { addRecipe } from "utils/actions";
+import Button from "components/Button";
+import Icon from "components/Icon";
+import Rating from "components/Rating";
 import * as colors from "utils/Colors";
 import {
   HeaderContainer,
@@ -29,6 +29,7 @@ import {
   StepWrap,
   StepNumber
 } from "./ShowRecipeStyledComponents";
+
 class ShowRecipe extends React.Component {
   componentDidMount = () => {
     const data = this.props.navigation.getParam("data", {});

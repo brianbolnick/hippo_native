@@ -1,12 +1,29 @@
 import styled from "styled-components";
 import * as colors from "utils/Colors";
 import {
-  ScrollView,
   Text,
   View,
   Image,
   TouchableHighlight
 } from "react-native";
+
+export const EmptyTextTitle = styled.Text`
+  text-align: center;
+  margin-top: 40;
+  font-size: 24px;
+  font-weight: 800;
+  color: ${colors.red};
+  padding-horizontal: 16;
+`;
+export const EmptyTextSub = styled.Text`
+  text-align: center;
+  margin-top: 8;
+  margin-bottom: 24;
+  font-size: 18px;
+  font-weight: 700;
+  color: ${colors.darkGray};
+  padding-horizontal: 16;
+`;
 
 export const Card = styled.TouchableHighlight`
   border-radius: 4px;

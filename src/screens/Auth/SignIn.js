@@ -1,15 +1,7 @@
 import React from "react";
-import { FormLabel, FormInput } from "react-native-elements";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  KeyboardAvoidingView
-} from "react-native";
-import { API_URL, handleNetworkErrors } from "utils/constants";
+import { KeyboardAvoidingView } from "react-native";
 import axios from "axios";
-import { onSignIn } from "utils/auth";
+import { onSignIn, API_URL, handleNetworkErrors } from "utils";
 import Button from "components/Button";
 import styled from "styled-components";
 import Input from "components/Input";
@@ -94,7 +86,7 @@ class SignIn extends React.Component {
           <Button
             label="Sign In"
             loading={this.state.loading}
-            onPress={() => this.handleSignIn()}
+            onPress={this.handleSignIn}
           />
           <Button
             label="Go Back"

@@ -1,42 +1,10 @@
-//import React from "react";
-//import { FormLabel, FormInput } from "react-native-elements";
-//import Input from 'components/Input'
-//import { View, StyleSheet, Image, KeyboardAvoidingView } from "react-native";
-//import { onSignIn } from "utils/auth";
-//import Button from 'components/Button';
-//import {ButtonContainer, ScreenContainer, Card, HeaderContainer, Header ,SubHeader} from './AuthStyledComponents';
-
-//export default ({ navigation }) => (
-//<ScreenContainer behavior="padding">
-//<HeaderContainer>
-//<SubHeader>Create An Account</SubHeader>
-//<Header>Join A Family</Header>
-//<KeyboardAvoidingView>
-//<Card>
-//<Input label="Family Join Code" placeholder="Family Code" />
-//</Card>
-//</KeyboardAvoidingView>
-//</HeaderContainer>
-
-//<ButtonContainer>
-//<Button
-//label="Let's Go!"
-//onPress={() => onSignIn().then(() => navigation.navigate("SignedIn"))}
-///>
-//<Button
-//label="Go Back"
-//tertiary
-//onPress={() => navigation.navigate("FamilyCodeIntro")}
-///>
-//</ButtonContainer>
-//</ScreenContainer>
-//);
 import React from "react";
+import axios from "axios";
 import { FormLabel, FormInput } from "react-native-elements";
-import Input from "components/Input";
 import { View, StyleSheet, Image, KeyboardAvoidingView } from "react-native";
-import { onSignIn } from "utils/auth";
+import { onSignIn, API_URL, handleNetworkErrors } from "utils";
 import Button from "components/Button";
+import Input from "components/Input";
 import {
   ButtonContainer,
   ScreenContainer,
@@ -47,8 +15,6 @@ import {
   ErrorText
 } from "./AuthStyledComponents";
 import { getRecipeArgs } from "./helper";
-import axios from "axios";
-import { API_URL, handleNetworkErrors } from "utils/constants";
 
 const config = { headers: {} };
 

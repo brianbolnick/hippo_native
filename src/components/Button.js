@@ -5,10 +5,9 @@ import {
   TouchableHighlight,
   ActivityIndicator
 } from "react-native";
-import { FontAwesome } from "@expo/vector-icons";
+import { LinearGradient, Constants } from "expo";
 import styled from "styled-components";
 import * as colors from "utils/Colors";
-import { LinearGradient, Constants } from "expo";
 
 const StyledOpacity = styled.TouchableHighlight`
   height: 56;

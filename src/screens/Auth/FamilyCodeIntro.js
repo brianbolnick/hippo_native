@@ -1,14 +1,9 @@
 import React from "react";
 import { Text, View, StyleSheet, KeyboardAvoidingView } from "react-native";
-import { FormLabel, FormInput } from "react-native-elements";
+import { onSignIn } from "utils";
 import * as colors from "utils/Colors";
-import { LinearGradient } from "expo";
-import Image from "react-native-remote-svg";
-import { onSignIn } from "utils/auth";
 import Button from "components/Button";
 import styled from "styled-components";
-
-const Logo = require("images/hippo-text.svg");
 
 const StyledText = styled.Text`
   font-size: 24px;

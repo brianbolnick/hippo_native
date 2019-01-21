@@ -6,12 +6,10 @@ import {
   Image,
   KeyboardAvoidingView
 } from "react-native";
-import { FormLabel, FormInput } from "react-native-elements";
-import * as colors from "utils/Colors";
-import { LinearGradient } from "expo";
-import { onSignIn } from "utils/auth";
-import Button from "components/Button";
 import styled from "styled-components";
+import { LinearGradient } from "expo";
+import Button from "components/Button";
+import * as colors from "utils/Colors";
 
 const Logo = require("images/hippo-logo-3.png");
 
