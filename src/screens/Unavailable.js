@@ -4,7 +4,8 @@ import {
   View,
   StyleSheet,
   Image,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Linking
 } from "react-native";
 import { FormLabel, FormInput } from "react-native-elements";
 import * as colors from "utils/Colors";
@@ -72,7 +73,7 @@ export default ({ navigation }) => (
         <ButtonContainer>
           <StyledButton
             label="Visit Web"
-            onPress={() => navigation.navigate("SignIn")}
+            onPress={() => Linking.openURL("https://hungryhippo.app")}
           />
         </ButtonContainer>
       </Card>
