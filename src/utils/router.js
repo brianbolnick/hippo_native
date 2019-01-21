@@ -13,6 +13,7 @@ import FamilyCodeIntro from "screens/Auth/FamilyCodeIntro";
 import FamilyCodeNew from "screens/Auth/FamilyCodeNew";
 import FamilyCodeExisting from "screens/Auth/FamilyCodeExisting";
 import Welcome from "screens/Welcome";
+import Unavailable from "screens/Unavailable";
 import SignIn from "screens/Auth/SignIn";
 import RecipeList from "screens/Recipes/RecipeList";
 import NewRecipe from "screens/Recipes/NewRecipe";
@@ -75,7 +76,7 @@ export const SignedOut = createStackNavigator({
 export const Recipe = createBottomTabNavigator(
   {
     RateRecipe: {
-      screen: Temp,
+      screen: Unavailable,
       navigationOptions: {
         tabBarLabel: "Rate",
         tabBarIcon: ({ tintColor }) => (
@@ -93,7 +94,7 @@ export const Recipe = createBottomTabNavigator(
       }
     },
     ShareRecipe: {
-      screen: Temp,
+      screen: Unavailable,
       navigationOptions: {
         tabBarLabel: "Share",
         tabBarIcon: ({ tintColor }) => (
@@ -128,7 +129,7 @@ export const SignedIn = createBottomTabNavigator(
       }
     },
     Create: {
-      screen: NewRecipe,
+      screen: Unavailable,
       navigationOptions: {
         tabBarLabel: "Create",
         tabBarIcon: ({ tintColor }) => (

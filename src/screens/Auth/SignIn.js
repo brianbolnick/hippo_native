@@ -91,7 +91,11 @@ class SignIn extends React.Component {
         </HeaderContainer>
 
         <ButtonContainer>
-          <Button label="Sign In" onPress={() => this.handleSignIn()} />
+          <Button
+            label="Sign In"
+            loading={this.state.loading}
+            onPress={() => this.handleSignIn()}
+          />
           <Button
             label="Go Back"
             tertiary
