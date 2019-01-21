@@ -25,8 +25,14 @@ import {
 
 const config = { headers: {} };
 
-class SignUp extends React.Component {
+class SetPassword extends React.Component {
   state = { email: "", name: "", error: "", loading: false };
+
+  componentDidMount = () => {
+    const name = this.props.navigation.getParam("name", "");
+    const email = this.props.navigation.getParam("email", "");
+    this.setState({ name, email });
+  };
 
   render() {
     const { navigation } = this.props;
@@ -36,21 +42,25 @@ class SignUp extends React.Component {
       <ScreenContainer behavior="padding">
         <HeaderContainer>
           <SubHeader>Create An Account</SubHeader>
-          <Header>Who are you</Header>
+          <Header>Set a Password</Header>
           {error.message && <ErrorText>{error.message}</ErrorText>}
           <KeyboardAvoidingView>
             <Card>
               <Input
-                onChangeText={text => this.setState({ name: text })}
-                label="Full Name"
-                textContentType="name"
-                placeholder="Full Name"
+                secureTextEntry
+                textContentType="password"
+                label="Password"
+                placeholder="Password"
+                onChangeText={text => this.setState({ password: text })}
               />
               <Input
-                onChangeText={text => this.setState({ email: text })}
-                label="Email"
-                textContentType="emailAddress"
-                placeholder="Email Address"
+                secureTextEntry
+                textContentType="password"
+                label="Password Confirmation"
+                placeholder="Confirm Password"
+                onChangeText={text =>
+                  this.setState({ passwordConfirmation: text })
+                }
               />
             </Card>
           </KeyboardAvoidingView>
@@ -60,16 +70,18 @@ class SignUp extends React.Component {
           <Button
             label="Next"
             onPress={() =>
-              navigation.navigate("SetPassword", {
+              navigation.navigate("FamilyCodeIntro", {
                 name,
-                email
+                email,
+                password: this.state.password,
+                passwordConfirmation: this.state.passwordConfirmation
               })
             }
           />
           <Button
             label="Go Back"
             tertiary
-            onPress={() => navigation.navigate("Welcome")}
+            onPress={() => navigation.navigate("SignUp")}
           />
         </ButtonContainer>
       </ScreenContainer>
@@ -77,4 +89,4 @@ class SignUp extends React.Component {
   }
 }
 
-export default SignUp;
+export default SetPassword;

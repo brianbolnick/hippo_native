@@ -11,6 +11,7 @@ import Icon from "components/Icon/Icon";
 import SignUp from "screens/Auth/SignUp";
 import FamilyCodeIntro from "screens/Auth/FamilyCodeIntro";
 import FamilyCodeNew from "screens/Auth/FamilyCodeNew";
+import SetPassword from "screens/Auth/SetPassword";
 import FamilyCodeExisting from "screens/Auth/FamilyCodeExisting";
 import Welcome from "screens/Welcome";
 import Unavailable from "screens/Unavailable";
@@ -34,6 +35,14 @@ export const SignedOut = createStackNavigator({
       headerTransparent: true
     }
   },
+  SetPassword: {
+    screen: SetPassword,
+    navigationOptions: {
+      headerStyle,
+      headerTransparent: true
+    }
+  },
+
   FamilyCodeIntro: {
     screen: FamilyCodeIntro,
     navigationOptions: {
