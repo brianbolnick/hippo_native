@@ -31,14 +31,12 @@ class SignIn extends React.Component {
       .post(`${API_URL}/sign_in`, data, config)
       .then(resp => {
         this.setState({ loading: false }, () => {
-          console.log("RESP", resp);
           if (resp.error) {
             const message = handleNetworkErrors(500);
             this.setState({ loading: false, error: { message } });
           } else {
             if (resp.data.jwt) {
               onSignIn(resp.data);
-              console.log(resp.data.jwt);
               this.props.navigation.navigate("SignedIn");
             }
           }
