@@ -26,11 +26,55 @@ import {
 const config = { headers: {} };
 
 class SignUp extends React.Component {
-  state = { email: "", name: "", error: "", loading: false };
+  state = {
+    email: "",
+    name: "",
+    error: "",
+    invalidInput: true,
+    loading: false
+  };
+
+  verifyEmail = () => {
+    const { email } = this.state;
+    var re = /\S+@\S+\.\S+/;
+    if (!email || re.test(email) === false) {
+      this.setState({
+        error: {
+          message: "Please enter a valid email address.",
+          invalidInput: true
+        }
+      });
+      return;
+    }
+
+    axios
+      .get(`${API_URL}/check_email/${email}`, {}, config)
+      .then(resp => {
+        if (resp.status !== 200) {
+          this.setState({
+            error: {
+              message: "That email has already been taken.",
+              invalidInput: true
+            }
+          });
+        } else {
+          this.setState({ error: { message: "" }, invalidInput: false });
+        }
+      })
+      .catch(err => {
+        console.log("ERRORRRR", err);
+        this.setState({
+          error: {
+            message: "That email has already been taken.",
+            invalidInput: true
+          }
+        });
+      });
+  };
 
   render() {
     const { navigation } = this.props;
-    const { error, name, email } = this.state;
+    const { error, name, email, invalidInput } = this.state;
 
     return (
       <ScreenContainer behavior="padding">
@@ -50,6 +94,7 @@ class SignUp extends React.Component {
                 onChangeText={text => this.setState({ email: text })}
                 label="Email"
                 textContentType="emailAddress"
+                onBlur={this.verifyEmail}
                 placeholder="Email Address"
               />
             </Card>
@@ -59,6 +104,7 @@ class SignUp extends React.Component {
         <ButtonContainer>
           <Button
             label="Next"
+            disabled={invalidInput}
             onPress={() =>
               navigation.navigate("SetPassword", {
                 name,

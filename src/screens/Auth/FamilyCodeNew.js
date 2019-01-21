@@ -10,9 +10,14 @@ import {
   Card,
   HeaderContainer,
   Header,
-  SubHeader
+  SubHeader,
+  ErrorText
 } from "./AuthStyledComponents";
 import { getRecipeArgs } from "./helper";
+import axios from "axios";
+import { API_URL, handleNetworkErrors } from "utils/constants";
+
+const config = { headers: {} };
 
 class FamilyCodeNew extends React.Component {
   state = {
@@ -23,6 +28,7 @@ class FamilyCodeNew extends React.Component {
     password: "",
     passwordConfirmation: "",
     error: "",
+    invalidInput: true,
     loading: false
   };
 
@@ -34,13 +40,48 @@ class FamilyCodeNew extends React.Component {
       "passwordConfirmation",
       ""
     );
-    console.log(password);
     this.setState({ name, email, password, passwordConfirmation });
+  };
+
+  verifyCode = () => {
+    const { joinCode } = this.state;
+    if (!joinCode) {
+      this.setState({
+        error: {
+          message: "Please enter a join code.",
+          invalidInput: true
+        }
+      });
+      return;
+    }
+
+    axios
+      .get(`${API_URL}/family/code/${joinCode.toLowerCase()}`, {}, config)
+      .then(resp => {
+        if (resp.status === 200) {
+          this.setState({
+            error: {
+              message: "That join code is already in use.",
+              invalidInput: true
+            }
+          });
+        } else {
+          this.setState({ error: { message: "" }, invalidInput: false });
+        }
+      })
+      .catch(err => {
+        console.log("ERRORRRR", err);
+        this.setState({
+          error: {
+            message: "That join code is already in use.",
+            invalidInput: true
+          }
+        });
+      });
   };
 
   handleSignUp = () => {
     this.setState({ loading: true });
-    console.log("SUBMITTING", this.state);
     const data = {
       user: {
         name: this.state.name,
@@ -52,63 +93,56 @@ class FamilyCodeNew extends React.Component {
       }
     };
 
-    console.log("DATA", data);
+    axios
+      .post(`${API_URL}/sign_up`, data, config)
+      .then(resp => {
+        if (resp.error || !resp.data.jwt) {
+          const message = handleNetworkErrors(500);
+          this.setState({ loading: false, error: { message } });
+        } else {
+          onSignIn(resp.data);
+          this.props.navigation.navigate("SignedIn");
+          //const jwt = resp.data.jwt;
+          //const sub = JSON.parse(jwt.sub);
+          //const familyId = sub.family_id;
+          //const userId = sub.id;
+          //const data = new FormData();
+          //const recipeData = getRecipeArgs(familyId, userId);
 
-    //axios
-    //.post(`${API_URL}/sign_up`, data, config)
-    //.then(resp => {
-    //this.setState({ loading: false }, () => {
-    //console.log("RESP", resp);
-    //if (resp.error) {
-    //const message = handleNetworkErrors(500);
-    //this.setState({ loading: false, error: { message } });
-    //} else {
-    //if (resp.data.jwt) {
-    //const jwt = jwtDecode(resp.data.jwt);
-    //onSignIn(resp.data);
-    //const sub = JSON.parse(jwt.sub);
-    //const familyId = sub.family_id;
-    //const userId = sub.id;
-    //const data = new FormData();
-    //const recipeData = getRecipeArgs(familyId, userId);
-    //Object.keys(recipeData).forEach(obj => {
-    //const val = recipeData[obj];
-    //if (val instanceof Array) {
-    //data.append(obj, JSON.stringify(val));
-    //} else {
-    //data.append(obj, val);
-    //}
-    //});
+          //Object.keys(recipeData).forEach(obj => {
+          //const val = recipeData[obj];
+          //if (val instanceof Array) {
+          //data.append(obj, JSON.stringify(val));
+          //} else {
+          //data.append(obj, val);
+          //}
+          //});
 
-    //axios
-    //.post(`${API_URL}/recipes`, data, {
-    //headers: { Authorization: `Bearer ${resp.data.jwt}` }
-    //})
-    //.then(resp => {
-    //this.props.navigation.navigate("SignedIn");
-    //})
-    //.catch(err => {
-    //console.log(err);
-    //const message = handleNetworkErrors(err);
-    //this.setState({ loading: false, error: { message } });
-    //});
-    //}
-    //})
-    //}
-    //})
-    //.catch(err => {
-    //console.log("ERR", err);
-    //const message = handleNetworkErrors(err);
-    //this.setState({
-    //loading: false,
-    //error: { message }
-    //});
-    //});
+          //console.log("new data", data);
+          //axios
+          //.post(`${API_URL}/recipes`, data, {
+          //headers: { Authorization: `Bearer ${resp.data.jwt}` }
+          //})
+          //.then(resp => {
+          //this.props.navigation.navigate("SignedIn");
+          //})
+          //.catch(err => {
+          //console.log("2", err);
+          //const message = handleNetworkErrors(err);
+          //this.setState({ loading: false, error: { message } });
+          //});
+        }
+      })
+      .catch(err => {
+        console.log("1", err);
+        const message = handleNetworkErrors(err);
+        this.setState({ loading: false, error: { message } });
+      });
   };
 
   render() {
     const { navigation } = this.props;
-    const { error, familyName, joinCode } = this.state;
+    const { invalidInput, error, familyName, joinCode, loading } = this.state;
     return (
       <ScreenContainer behavior="padding">
         <HeaderContainer>
@@ -126,13 +160,19 @@ class FamilyCodeNew extends React.Component {
                 onChangeText={text => this.setState({ joinCode: text })}
                 label="Join Code"
                 placeholder="Unique Join Code"
+                onBlur={this.verifyCode}
               />
             </Card>
           </KeyboardAvoidingView>
         </HeaderContainer>
 
         <ButtonContainer>
-          <Button label="Let's Go!" onPress={this.handleSignUp} />
+          <Button
+            disabled={invalidInput}
+            label="Let's Go!"
+            onPress={this.handleSignUp}
+            loading={loading}
+          />
           <Button
             label="Go Back"
             tertiary

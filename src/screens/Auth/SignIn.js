@@ -30,7 +30,6 @@ class SignIn extends React.Component {
 
   handleSignIn = () => {
     this.setState({ loading: true });
-    console.log("SUBMITTING", this.state);
     const data = {
       email: this.state.email.toLowerCase(),
       password: this.state.password
@@ -47,6 +46,7 @@ class SignIn extends React.Component {
           } else {
             if (resp.data.jwt) {
               onSignIn(resp.data);
+              console.log(resp.data.jwt);
               this.props.navigation.navigate("SignedIn");
             }
           }

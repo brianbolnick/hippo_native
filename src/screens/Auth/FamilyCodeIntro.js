@@ -77,7 +77,9 @@ class FamilyCodeIntro extends React.Component {
               onPress={() =>
                 navigation.navigate("FamilyCodeExisting", {
                   name: this.state.name,
-                  email: this.state.email
+                  email: this.state.email,
+                  password: this.state.password,
+                  passwordConfirmation: this.state.passwordConfirmation
                 })
               }
             />

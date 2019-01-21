@@ -26,7 +26,14 @@ import {
 const config = { headers: {} };
 
 class SetPassword extends React.Component {
-  state = { email: "", name: "", error: "", loading: false };
+  state = {
+    password: "",
+    passwordConfirmation: "",
+    email: "",
+    name: "",
+    error: "",
+    invalidInput: true
+  };
 
   componentDidMount = () => {
     const name = this.props.navigation.getParam("name", "");
@@ -34,9 +41,26 @@ class SetPassword extends React.Component {
     this.setState({ name, email });
   };
 
+  verifyPassword = () => {
+    const { password, passwordConfirmation } = this.state;
+    if (password.length < 8) {
+      this.setState({
+        error: { message: "Password must be at least 8 characters" },
+        invalidInput: true
+      });
+    } else if (!passwordConfirmation || password !== passwordConfirmation) {
+      this.setState({
+        error: { message: "Passwords must match." },
+        invalidInput: true
+      });
+    } else {
+      this.setState({ error: { message: "" }, invalidInput: false });
+    }
+  };
+
   render() {
     const { navigation } = this.props;
-    const { error, name, email } = this.state;
+    const { error, name, email, invalidInput } = this.state;
 
     return (
       <ScreenContainer behavior="padding">
@@ -58,6 +82,7 @@ class SetPassword extends React.Component {
                 textContentType="password"
                 label="Password Confirmation"
                 placeholder="Confirm Password"
+                onBlur={this.verifyPassword}
                 onChangeText={text =>
                   this.setState({ passwordConfirmation: text })
                 }
@@ -69,6 +94,7 @@ class SetPassword extends React.Component {
         <ButtonContainer>
           <Button
             label="Next"
+            disabled={invalidInput}
             onPress={() =>
               navigation.navigate("FamilyCodeIntro", {
                 name,

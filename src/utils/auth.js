@@ -7,8 +7,8 @@ const TOKEN_KEY = "AUTH_TOKEN";
 export const onSignIn = data => {
   const jwt = jwtDecode(data.jwt);
 
-  console.log("JWT", data.jwt);
-  console.log("DECODED-JWT", jwt);
+  //console.log("JWT", data.jwt);
+  //console.log("DECODED-JWT", jwt);
 
   AsyncStorage.setItem(TOKEN_KEY, data.jwt);
   AsyncStorage.setItem(JWT_KEY, JSON.stringify(jwt));

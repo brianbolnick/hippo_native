@@ -48,6 +48,14 @@ const ButtonText = styled.Text`
 		font-size: 14px;
 		font-weight: 600;
 	`}
+
+  ${({ disabled }) =>
+    disabled &&
+    `
+		color: ${colors.darkGray};
+	`}
+
+
 `;
 
 const Button = ({
@@ -58,16 +66,24 @@ const Button = ({
   backgroundColor,
   secondary,
   tertiary,
+  disabled,
   ...rest
 }) => (
   <StyledOpacity
-    onPress={onPress}
+    onPress={disabled ? null : onPress}
     secondary={secondary}
     tertiary={tertiary}
+    disabled={disabled}
     underlayColor={tertiary ? "transparent" : colors.mutedGray}
   >
     <LinearGradient
-      colors={secondary || tertiary ? [] : colors.primaryGradientArray}
+      colors={
+        secondary || tertiary
+          ? []
+          : disabled
+          ? colors.disabledGradientArray
+          : colors.primaryGradientArray
+      }
       start={{ x: 0.0, y: 1.0 }}
       end={{ x: 1.0, y: 1.0 }}
       style={
@@ -82,7 +98,11 @@ const Button = ({
       {loading ? (
         <ActivityIndicator size="large" color={colors.white} />
       ) : (
-        <ButtonText secondary={secondary} tertiary={tertiary}>
+        <ButtonText
+          secondary={secondary}
+          tertiary={tertiary}
+          disabled={disabled}
+        >
           {label}
         </ButtonText>
       )}

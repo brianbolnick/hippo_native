@@ -47,6 +47,7 @@ const primaryEnd = red;
 export const primaryGradientArray = [primaryStart, primaryEnd];
 export const secondaryGradientArray = [blue, darkBlue];
 export const otherGradientArray = [green, darkGreen];
+export const disabledGradientArray = [mutedGray, offGray];
 
 export default {
   whiteSmoke,
@@ -64,6 +65,7 @@ export default {
   offWhite,
   orange,
   primaryGradientArray,
+  disabledGradientArray,
   red,
   white,
   yellow
