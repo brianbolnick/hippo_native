@@ -1,33 +1,61 @@
 import React from "react";
-import { ScrollView, Text, View } from "react-native";
-import { EmptyTextTitle, EmptyTextSub } from "./RecipeCardStyledComponents";
+import { ActivityIndicator, ScrollView, Text, View } from "react-native";
+import axios from "axios";
+import {
+  EmptyTextTitle,
+  EmptyTextSub,
+  SectionTitle,
+  CardsContainer
+} from "./RecipeCardStyledComponents";
 import RecipeCard from "./RecipeCard";
 import { tempRecipes } from "./helper";
-import { getUserId, userId, familyId } from "utils";
-
-//const recipes = [];
+import { getDataFromAs, API_URL } from "utils";
+import * as keys from "utils/constants";
+import * as colors from "utils/Colors";
 
 export default class RecipeList extends React.Component {
-  state = { recipes: [], sharedRecipes: [] };
+  state = { recipes: [], sharedRecipes: [], loading: true };
+
+  getRecipes = (userId, familyId, authToken, recipeType) => {
+    return axios.get(`${API_URL}/family/${familyId}/${recipeType}`, {
+      headers: { Authorization: `Bearer ${authToken}` }
+    });
+  };
 
   async componentDidMount() {
-    //const uid = getUserId();
-    await getUserId()
-      .then(res =>
-        this.setState({ userId: res }, () => console.log(this.state))
-      )
-      .catch(err => alert("An error occurred"));
+    const { userId, familyId, authToken } = await getDataFromAs();
 
-    //console.log("user", uid);
-    //await console.log("ID", userId);
-    //await console.log("FAMID", familyId);
+    axios
+      .all([
+        this.getRecipes(userId, familyId, authToken, "recipes"),
+        this.getRecipes(userId, familyId, authToken, "shared_recipes")
+      ])
+      .then(
+        axios.spread((recipeData, sharedRecipeData) => {
+          const recipes = recipeData.data.data;
+          const sharedRecipes = sharedRecipeData.data.data;
+          this.setState({ recipes, sharedRecipes, loading: false });
+        })
+      )
+      .catch(err => {
+        console.log(err);
+        this.setState({ error: "Something went wrong", loading: false });
+      });
   }
 
   render() {
     const { navigation } = this.props;
-    const { recipes } = this.state;
+    const { recipes, sharedRecipes, loading } = this.state;
 
     const renderCards = recipes => {
+      if (recipes === this.state.sharedRecipes) {
+        return (
+          recipes &&
+          recipes.map(data => (
+            <RecipeCard data={data} key={data.id} navigation={navigation} />
+          ))
+        );
+      }
       const recipeMap = recipes.length ? recipes : tempRecipes;
       return recipeMap.map(data => (
         <RecipeCard data={data} key={data.id} navigation={navigation} />
@@ -36,24 +64,37 @@ export default class RecipeList extends React.Component {
 
     return (
       <View style={{ flex: 1, paddingTop: 50 }}>
-        <ScrollView
-          contentContainerStyle={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            alignItems: "center",
-            justifyContent: "center"
-          }}
-        >
-          {!recipes.length && (
-            <View>
-              <EmptyTextTitle>You don't have any recipes yet.</EmptyTextTitle>
-              <EmptyTextSub>
-                Here are some samples until you create your own.
-              </EmptyTextSub>
-            </View>
-          )}
-          {renderCards(recipes)}
-        </ScrollView>
+        {loading ? (
+          <View
+            style={{
+              alignItems: "center",
+              marginTop: 200,
+              justifyContent: "center"
+            }}
+          >
+            <ActivityIndicator size="large" color={colors.black} />
+          </View>
+        ) : (
+          <ScrollView
+            contentContainerStyle={{
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
+            {!recipes.length && (
+              <View>
+                <EmptyTextTitle>You don't have any recipes yet.</EmptyTextTitle>
+                <EmptyTextSub>
+                  Here are some samples until you create your own.
+                </EmptyTextSub>
+              </View>
+            )}
+            <SectionTitle>Family Recipes</SectionTitle>
+            <CardsContainer>{renderCards(recipes)}</CardsContainer>
+            <SectionTitle>Recipes Shared With Me</SectionTitle>
+            <CardsContainer>{renderCards(sharedRecipes)}</CardsContainer>
+          </ScrollView>
+        )}
       </View>
     );
   }

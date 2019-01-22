@@ -36,33 +36,22 @@ if (__DEV__) {
 } else {
   backendHost = "https://hungryhippo-api.herokuapp.com";
 }
-export const getFromAs = async key => {
-  return new Promise((resolve, reject) => {
-    AsyncStorage.getItem(keys)
-      .then(res => {
-        return res;
-      })
-      .catch(err => reject(err));
+
+export const API_URL = `${backendHost}/api/${apiVersion}`;
+
+export const getDataFromAs = async () => {
+  return AsyncStorage.multiGet([
+    keys.USER_ID_KEY,
+    keys.FAMILY_ID_KEY,
+    keys.TOKEN_KEY
+  ]).then(response => {
+    return {
+      userId: response[0][1],
+      familyId: response[1][1],
+      authToken: response[2][1]
+    };
   });
 };
-//const getFromAs = async key => {
-//try {
-//const value = await AsyncStorage.getItem(key);
-//if (value !== null) {
-//// We have data!!
-//console.log("VALUE", value);
-//return await value;
-//}
-//} catch (error) {
-//return "";
-//}
-//};
-export const getUserId = () => getFromAs(keys.USER_ID_KEY);
-export const API_URL = `${backendHost}/api/${apiVersion}`;
-export const userId = getFromAs(keys.USER_ID_KEY);
-export const familyId = getFromAs(keys.FAMILY_ID_KEY);
-export const token = getFromAs(keys.TOKEN_KEY);
-export const jwt = getFromAs(keys.JWT_KEY);
 
 const errorMap = {
   401: "Invalid credentials.",

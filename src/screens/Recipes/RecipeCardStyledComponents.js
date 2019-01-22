@@ -1,11 +1,6 @@
 import styled from "styled-components";
 import * as colors from "utils/Colors";
-import {
-  Text,
-  View,
-  Image,
-  TouchableHighlight
-} from "react-native";
+import { Text, View, Image, TouchableHighlight } from "react-native";
 
 export const EmptyTextTitle = styled.Text`
   text-align: center;
@@ -23,6 +18,23 @@ export const EmptyTextSub = styled.Text`
   font-weight: 700;
   color: ${colors.darkGray};
   padding-horizontal: 16;
+`;
+export const SectionTitle = styled.Text`
+  text-align: center;
+  margin-top: 8;
+  margin-bottom: 24;
+  font-size: 18px;
+  font-weight: 700;
+  color: ${colors.darkGray};
+  padding-horizontal: 16;
+`;
+
+export const CardsContainer = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-vertical: 24;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Card = styled.TouchableHighlight`
