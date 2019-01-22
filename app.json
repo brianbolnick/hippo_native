@@ -9,7 +9,7 @@
       "ios",
       "android"
     ],
-    "version": "0.0.1",
+    "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -27,7 +27,7 @@
       "supportsTablet": true
     },
     "androidStatusBar": {
-      "backgroundColor": "#f18a69"
+      "backgroundColor": "#FE4969"
     },
     "githubUrl": "https://github.com/brianbolnick/hippo_native"
   }
