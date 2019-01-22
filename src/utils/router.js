@@ -18,6 +18,7 @@ import Welcome from "screens/Welcome";
 import Unavailable from "screens/Unavailable";
 import SignIn from "screens/Auth/SignIn";
 import RecipeList from "screens/Recipes/RecipeList";
+import RateRecipe from "screens/Recipes/RateRecipe";
 import NewRecipe from "screens/Recipes/NewRecipe";
 import Temp from "screens/Recipes/Temp";
 import ShowRecipe from "screens/Recipes/ShowRecipe";
@@ -85,7 +86,7 @@ export const SignedOut = createStackNavigator({
 export const Recipe = createBottomTabNavigator(
   {
     RateRecipe: {
-      screen: Unavailable,
+      screen: RateRecipe,
       navigationOptions: {
         tabBarLabel: "Rate",
         tabBarIcon: ({ tintColor }) => (
