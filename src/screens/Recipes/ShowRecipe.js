@@ -64,8 +64,11 @@ class ShowRecipe extends React.Component {
   };
 
   render() {
-    const { navigation } = this.props;
-    const data = navigation.getParam("data", {});
+    const { navigation, recipeData } = this.props;
+    console.log("RENDER ---------------------------", recipeData);
+    const data = recipeData.length
+      ? recipeData
+      : navigation.getParam("data", {});
     return (
       <View style={{ flex: 1, paddingTop: 50 }}>
         <HeaderContainer style={{ alignItems: "flex-start" }}>
@@ -114,10 +117,15 @@ class ShowRecipe extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  console.log("STATE", state.recipes.recipeData);
+  return { recipeData: state.recipes.recipeData };
+};
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ addRecipe }, dispatch);
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(ShowRecipe);
