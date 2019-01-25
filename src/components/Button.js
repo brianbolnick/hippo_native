@@ -53,8 +53,6 @@ const ButtonText = styled.Text`
     `
 		color: ${colors.darkGray};
 	`}
-
-
 `;
 
 const Button = ({

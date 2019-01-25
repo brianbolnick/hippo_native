@@ -155,8 +155,9 @@ class RateRecipe extends React.Component {
           <Card>
             <Input
               onChangeText={this.handleRatingChange}
-              label="Rating"
               placeholder="0 - 5"
+              large
+              keyboardType="numeric"
             />
 
             <ButtonContainer>

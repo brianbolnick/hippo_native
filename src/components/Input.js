@@ -13,6 +13,17 @@ const StyledInput = styled.TextInput`
   border-bottom-width: 1px;
   padding-bottom: 16;
   width: 100%;
+
+  ${({ large }) =>
+    large &&
+    `
+		font-size: 40;
+		font-weight: 900;
+		text-align: center;
+		width: 50%;
+		margin-left: auto;
+		margin-right: auto;
+	`};
 `;
 
 const Container = styled.View`
@@ -43,6 +54,8 @@ class Input extends React.Component {
       placeholder,
       textContentType,
       onBlur,
+      large,
+      keyboardType,
       ...rest
     } = this.props;
     const { isFocused } = this.state;
@@ -51,6 +64,7 @@ class Input extends React.Component {
       <Container>
         {label && <Label>{label}</Label>}
         <StyledInput
+          large={large}
           isFocused={isFocused}
           value={value}
           onChangeText={onChangeText}
@@ -66,6 +80,7 @@ class Input extends React.Component {
           textContentType={textContentType}
           onFocus={() => this.setState({ isFocused: true })}
           onBlur={() => this.setState({ isFocused: false }, onBlur && onBlur())}
+          keyboardType={keyboardType}
           {...rest}
         />
       </Container>

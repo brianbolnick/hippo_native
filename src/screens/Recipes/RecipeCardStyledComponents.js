@@ -53,6 +53,7 @@ export const RecipeImage = styled.Image`
   position: relative;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
+  width: 100%;
 `;
 
 export const Title = styled.Text`

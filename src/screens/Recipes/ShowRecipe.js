@@ -29,6 +29,7 @@ import {
   StepWrap,
   StepNumber
 } from "./ShowRecipeStyledComponents";
+const PlaceholderImage = require("images/recipe-placeholder.png");
 
 class ShowRecipe extends React.Component {
   componentDidMount = () => {
@@ -65,10 +66,10 @@ class ShowRecipe extends React.Component {
 
   render() {
     const { navigation, recipeData } = this.props;
-    console.log("RENDER ---------------------------", recipeData);
-    const data = recipeData.length
-      ? recipeData
-      : navigation.getParam("data", {});
+    const data =
+      Object.keys(recipeData).length > 0
+        ? recipeData
+        : navigation.getParam("data", {});
     return (
       <View style={{ flex: 1, paddingTop: 50 }}>
         <HeaderContainer style={{ alignItems: "flex-start" }}>
@@ -91,7 +92,7 @@ class ShowRecipe extends React.Component {
           <RecipeTitle>{data.title}</RecipeTitle>
           <Image
             style={{ width: "100%", height: 300 }}
-            source={{ uri: data.image_url }}
+            source={data.image_url ? { uri: data.image_url } : PlaceholderImage}
           />
           <RecipeContent>
             <MetaContainer>
@@ -118,8 +119,7 @@ class ShowRecipe extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log("STATE", state.recipes.recipeData);
-  return { recipeData: state.recipes.recipeData };
+  return { recipeData: state.recipes.recipeData || {} };
 };
 
 const mapDispatchToProps = dispatch =>
