@@ -19,6 +19,7 @@ import Unavailable from "screens/Unavailable";
 import SignIn from "screens/Auth/SignIn";
 import RecipeList from "screens/Recipes/RecipeList";
 import RateRecipe from "screens/Recipes/RateRecipe";
+import ShareRecipe from "screens/Recipes/ShareRecipe";
 import NewRecipe from "screens/Recipes/NewRecipe";
 import Temp from "screens/Recipes/Temp";
 import ShowRecipe from "screens/Recipes/ShowRecipe";
@@ -104,7 +105,7 @@ export const Recipe = createBottomTabNavigator(
       }
     },
     ShareRecipe: {
-      screen: Unavailable,
+      screen: ShareRecipe,
       navigationOptions: {
         tabBarLabel: "Share",
         tabBarIcon: ({ tintColor }) => (
