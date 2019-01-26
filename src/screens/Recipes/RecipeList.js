@@ -51,14 +51,22 @@ export default class RecipeList extends React.Component {
       if (recipes === this.state.sharedRecipes) {
         return (
           recipes &&
-          recipes.map(data => (
-            <RecipeCard data={data} key={data.id} navigation={navigation} />
+          recipes.map((data, index) => (
+            <RecipeCard
+              data={data}
+              key={data.id == 0 ? `0-${index}` : data.id}
+              navigation={navigation}
+            />
           ))
         );
       }
       const recipeMap = recipes.length ? recipes : tempRecipes;
-      return recipeMap.map(data => (
-        <RecipeCard data={data} key={data.id} navigation={navigation} />
+      return recipeMap.map((data, index) => (
+        <RecipeCard
+          data={data}
+          key={data.id == 0 ? `0-${index}` : data.id}
+          navigation={navigation}
+        />
       ));
     };
 

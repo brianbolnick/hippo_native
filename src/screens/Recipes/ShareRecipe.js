@@ -23,12 +23,14 @@ const Error = styled.Text`
   color: ${colors.red};
   font-size: 16;
   margin-vertical: 16;
+  text-align: center;
 `;
 
 const Success = styled.Text`
   color: ${colors.green};
   font-size: 24;
   margin-vertical: 16;
+  text-align: center;
 `;
 
 const RatingContainer = styled.View`
@@ -87,30 +89,22 @@ class RateRecipe extends React.Component {
     sharedFamilyId: ""
   };
 
-  //isRatingValid = rating => {
-  //const regex = /^[0-5]{0,1}(\.\d{1,2})?$/;
-  //return rating && regex.test(rating);
-  //};
-
-  //handleRatingChange = text => {
-  //const rating = text;
-  //if (this.isRatingValid(rating)) {
-  //this.setState({ rating: parseInt(rating), error: "", ratingValid: true });
-  //} else {
-  //this.setState({
-  //error:
-  //rating.length <= 4
-  //? "Rating must be a number between 0 and 5"
-  //: "Rating must have no more than 2 decimal places.",
-  //ratingValid: false
-  //});
-  //}
-  //};
+  componentDidMount = () => {
+    const { recipe } = this.props;
+    if (recipe.recipeData.id === 0) {
+      this.setState({
+        error:
+          "This is only a sample recipe and is for demonstrational purposes only."
+      });
+    }
+  };
 
   onCodeFieldChange = async text => {
     const { authToken } = await getDataFromAs();
     const code = text;
-    if (code && code.length >= 3) {
+
+    const { recipe } = this.props;
+    if (code && code.length >= 3 && recipe.recipeData.id !== 0) {
       this.setState({ loading: true, joinCode: code }, () => {
         axios
           .get(`${API_URL}/family/code/${code}`, {
@@ -188,7 +182,7 @@ class RateRecipe extends React.Component {
             <ButtonContainer>
               <StyledButton
                 label="Share!"
-                disabled={!joinCodeValid}
+                disabled={!joinCodeValid || recipe.recipeData.id === 0}
                 onPress={this.handleFormSubmit}
               />
             </ButtonContainer>

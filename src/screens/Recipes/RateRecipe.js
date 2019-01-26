@@ -23,12 +23,14 @@ const Error = styled.Text`
   color: ${colors.red};
   font-size: 16;
   margin-vertical: 16;
+  text-align: center;
 `;
 
 const Success = styled.Text`
   color: ${colors.green};
   font-size: 24;
   margin-vertical: 16;
+  text-align: center;
 `;
 
 const RatingContainer = styled.View`
@@ -81,23 +83,41 @@ const StyledButton = styled(Button)`
 class RateRecipe extends React.Component {
   state = { loading: false, error: "", ratingValid: false, rating: 0 };
 
+  componentDidMount = () => {
+    const { recipe } = this.props;
+    if (recipe.recipeData.id === 0) {
+      this.setState({
+        error:
+          "This is only a sample recipe and is for demonstrational purposes only."
+      });
+    }
+  };
+
   isRatingValid = rating => {
     const regex = /^[0-5]{0,1}(\.\d{1,2})?$/;
     return rating && regex.test(rating);
   };
 
   handleRatingChange = text => {
+    const { recipe } = this.props;
     const rating = text;
-    if (this.isRatingValid(rating)) {
-      this.setState({ rating: parseInt(rating), error: "", ratingValid: true });
-    } else {
-      this.setState({
-        error:
-          rating.length <= 4
-            ? "Rating must be a number between 0 and 5"
-            : "Rating must have no more than 2 decimal places.",
-        ratingValid: false
-      });
+
+    if (recipe.recipeData.id !== 0) {
+      if (this.isRatingValid(rating)) {
+        this.setState({
+          rating: parseInt(rating),
+          error: "",
+          ratingValid: true
+        });
+      } else {
+        this.setState({
+          error:
+            rating.length <= 4
+              ? "Rating must be a number between 0 and 5"
+              : "Rating must have no more than 2 decimal places.",
+          ratingValid: false
+        });
+      }
     }
   };
 
@@ -163,7 +183,11 @@ class RateRecipe extends React.Component {
             <ButtonContainer>
               <StyledButton
                 label="Save Rating"
-                disabled={rating === 0 || this.state.error.length > 0}
+                disabled={
+                  recipe.recipeData.id === 0 ||
+                  rating === 0 ||
+                  this.state.error.length > 0
+                }
                 onPress={this.handleFormSubmit}
               />
             </ButtonContainer>
