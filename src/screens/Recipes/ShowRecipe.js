@@ -43,7 +43,9 @@ class ShowRecipe extends React.Component {
       ingredients.map((ing, index) => {
         return (
           <IngredientWrap key={`ingredient|${index}`}>
-            <Ingredient>{ing}</Ingredient>
+            <Ingredient>{`${ing.quantity} ${ing.measurement} ${
+              ing.name
+            }`}</Ingredient>
           </IngredientWrap>
         );
       })
