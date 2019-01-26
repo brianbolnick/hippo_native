@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Image, View, ScrollView } from "react-native";
+import math from "mathjs";
 import { addRecipe } from "utils/actions";
 import Button from "components/Button";
 import Icon from "components/Icon";
@@ -27,13 +28,21 @@ import {
   StepsContainer,
   Step,
   StepWrap,
-  StepNumber
+  StepNumber,
+  ServingsContainer,
+  ServingsGroup,
+  ServingSize,
+  ChangeServingGroup,
+  ServingLabel
 } from "./ShowRecipeStyledComponents";
+import ServingsForm from "./ServingsForm";
 const PlaceholderImage = require("images/recipe-placeholder.png");
 
 class ShowRecipe extends React.Component {
+  state = { ingredientsList: [] };
   componentDidMount = () => {
     const data = this.props.navigation.getParam("data", {});
+    this.setState({ ingredientsList: data.ingredients });
     this.props.addRecipe(data);
   };
 
@@ -66,8 +75,48 @@ class ShowRecipe extends React.Component {
     );
   };
 
+  getQuantityType = quantity => {
+    if (math.fraction(quantity).d === 1) return "number";
+    return "fraction";
+  };
+
+  calculateQuantity = (quantity, serving, type) => {
+    switch (type) {
+      case "fraction": {
+        const fraction = math.fraction(quantity);
+        const value = math.multiply(fraction, serving);
+        return math.format(value);
+      }
+      default:
+        return quantity * serving;
+    }
+  };
+
+  updateIngredients = (ingredients, servings) => {
+    return (
+      ingredients.length &&
+      ingredients.map(ing => {
+        const type = this.getQuantityType(ing.quantity);
+        const quantity = this.calculateQuantity(ing.quantity, servings, type);
+        return {
+          ...ing,
+          quantity
+        };
+      })
+    );
+  };
+
+  handleServingsChange = servings => {
+    const ingredientsList = this.updateIngredients(
+      [...this.props.recipeData.ingredients],
+      servings
+    );
+    this.setState({ ingredientsList });
+  };
+
   render() {
     const { navigation, recipeData } = this.props;
+    const { ingredientsList } = this.state;
     const data =
       Object.keys(recipeData).length > 0
         ? recipeData
@@ -107,9 +156,15 @@ class ShowRecipe extends React.Component {
               </RatingContainer>
             </MetaContainer>
             {data.notes && <Details>"{data.notes}"</Details>}
-            <SectionTitle>Ingredients</SectionTitle>
+            <ServingsContainer>
+              <SectionTitle>Ingredients</SectionTitle>
+              <ServingsForm
+                currentServings={data.servings}
+                onChange={this.handleServingsChange}
+              />
+            </ServingsContainer>
             <IngredientsContainer>
-              {this.renderIngredients(data.ingredients)}
+              {this.renderIngredients(ingredientsList)}
             </IngredientsContainer>
             <SectionTitle>Directions</SectionTitle>
             <StepsContainer>{this.renderSteps(data.steps)}</StepsContainer>

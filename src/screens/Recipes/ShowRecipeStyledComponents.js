@@ -6,6 +6,35 @@ export const HeaderContainer = styled.View`
   height: 48;
 `;
 
+export const ServingsContainer = styled.View`
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 16;
+  width: 100%;
+`;
+
+export const ServingsGroup = styled.View`
+  align-self: flex-end;
+`;
+
+export const ServingSize = styled.Text`
+  font-weight: 800;
+  font-size: 20;
+  margin-horizontal: 8;
+`;
+
+export const ServingLabel = styled.Text`
+  font-size: 14;
+  color: ${colors.darkGray};
+`;
+
+export const ChangeServingGroup = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export const RecipeTitle = styled.Text`
   color: ${colors.black};
   font-weight: 900;
