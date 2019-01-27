@@ -85,7 +85,7 @@ class ShowRecipe extends React.Component {
       case "fraction": {
         const fraction = math.fraction(quantity);
         const value = math.multiply(fraction, serving);
-        return math.format(value);
+        return this.convertImproperFraction(value);
       }
       default:
         return quantity * serving;
@@ -104,6 +104,24 @@ class ShowRecipe extends React.Component {
         };
       })
     );
+  };
+
+  convertImproperFraction = fraction => {
+    const numerator = fraction.n;
+    const denominator = fraction.d;
+
+    if (numerator % denominator === 0) {
+      return numerator / denominator;
+    }
+
+    const mix = Math.floor(numerator / denominator);
+    const newNumerator = numerator % denominator;
+    return `${this.displayMix(mix)}${newNumerator}/${denominator}`;
+  };
+
+  displayMix = mix => {
+    if (mix) return `${mix} `;
+    return "";
   };
 
   handleServingsChange = servings => {
