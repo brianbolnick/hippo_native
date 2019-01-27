@@ -27,6 +27,8 @@ export const ServingSize = styled.Text`
 export const ServingLabel = styled.Text`
   font-size: 14;
   color: ${colors.darkGray};
+  margin-bottom: 4;
+  margin-left: 5;
 `;
 
 export const ChangeServingGroup = styled.View`
