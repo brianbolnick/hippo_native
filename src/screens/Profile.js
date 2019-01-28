@@ -1,32 +1,20 @@
 //import React from "react";
-//import { View } from "react-native";
-//import { Card, Text } from "react-native-elements";
-//import Button from "components/Button";
-//import { onSignOut } from "utils";
-
-//export default ({ navigation }) => (
-//<View style={{ paddingVertical: 60, paddingHorizontal: 32 }}>
-//<Button
-//label="SIGN OUT"
-//onPress={() => onSignOut().then(() => navigation.navigate("SignedOut"))}
-///>
-//</View>
-//);
-
 import React from "react";
 import {
   Text,
   View,
   StyleSheet,
   KeyboardAvoidingView,
-  Linking
+  Linking,
+  ActivityIndicator
 } from "react-native";
+import axios from "axios";
 import { FormLabel, FormInput } from "react-native-elements";
 import styled from "styled-components";
 import { LinearGradient } from "expo";
 import * as colors from "utils/Colors";
 import Button from "components/Button";
-import { onSignOut } from "utils";
+import { onSignOut, getDataFromAs, API_URL } from "utils";
 
 const StyledText = styled.Text`
   font-size: 32px;
@@ -71,28 +59,61 @@ const StyledButton = styled(Button)`
   margin-vertical: 16;
 `;
 
-export default ({ navigation }) => (
-  <ScreenContainer behavior="padding" style={styles.container}>
-    <LogoContainer>
-      <StyledText>Coming Soon</StyledText>
-      <StyledSubText>
-        You'll shortly have access to more profile settings.
-      </StyledSubText>
-    </LogoContainer>
-    <FormContainer>
-      <Card>
-        <ButtonContainer>
-          <StyledButton
-            label="SIGN OUT"
-            onPress={() =>
-              onSignOut().then(() => navigation.navigate("SignedOut"))
-            }
-          />
-        </ButtonContainer>
-      </Card>
-    </FormContainer>
-  </ScreenContainer>
-);
+class Profile extends React.Component {
+  state = { user: [], loading: true };
+
+  getUser = (userId, authToken) => {
+    return axios.get(`${API_URL}/users/${userId}`, {
+      headers: { Authorization: `Bearer ${authToken}` }
+    });
+  };
+
+  async componentDidMount() {
+    const { authToken } = await getDataFromAs();
+    axios
+      .get(`${API_URL}/me`, {
+        headers: { Authorization: `Bearer ${authToken}` }
+      })
+      .then(({ data }) => {
+        const user = data.data;
+        this.setState({ user, loading: false });
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({ error: "Something went wrong", loading: false });
+      });
+  }
+
+  render() {
+    const { navigation } = this.props;
+    const { user } = this.state;
+    console.log("USER", user);
+    return !user.name ? (
+      <ScreenContainer behavior="padding" style={styles.container}>
+        <ActivityIndicator size="large" color={colors.black} />
+      </ScreenContainer>
+    ) : (
+      <ScreenContainer behavior="padding" style={styles.container}>
+        <LogoContainer>
+          <StyledText>{user.name}</StyledText>
+          <StyledSubText>{user.family.display_name}</StyledSubText>
+        </LogoContainer>
+        <FormContainer>
+          <Card>
+            <ButtonContainer>
+              <StyledButton
+                label="SIGN OUT"
+                onPress={() =>
+                  onSignOut().then(() => navigation.navigate("SignedOut"))
+                }
+              />
+            </ButtonContainer>
+          </Card>
+        </FormContainer>
+      </ScreenContainer>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -103,3 +124,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-around"
   }
 });
+
+export default Profile;

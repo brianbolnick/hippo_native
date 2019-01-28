@@ -105,7 +105,7 @@ class RateRecipe extends React.Component {
     if (recipe.recipeData.id !== 0) {
       if (this.isRatingValid(rating)) {
         this.setState({
-          rating: parseInt(rating),
+          rating: parseFloat(rating),
           error: "",
           ratingValid: true
         });

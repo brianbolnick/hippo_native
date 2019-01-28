@@ -15,7 +15,7 @@ class Rating extends Component {
     const { value, large } = this.props;
 
     //round value to nearest .5
-    const rounded = Math.round(value * 2) / 2;
+    const rounded = (Math.round(value * 2) / 2).toPrecision(2);
 
     let stars = [];
     for (let i = 1; i <= 5; i++) {
@@ -45,9 +45,13 @@ class Rating extends Component {
 }
 
 Rating.propTypes = {
-  value: PropTypes.number.isRequired,
+  value: PropTypes.number,
   large: PropTypes.bool,
   onSubmit: PropTypes.func
+};
+
+Rating.defaultProps = {
+  value: 0
 };
 
 export default Rating;
