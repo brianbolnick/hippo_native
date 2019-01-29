@@ -6,6 +6,18 @@ export const HeaderContainer = styled.View`
   height: 48;
 `;
 
+export const TypeContainer = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+`;
+
+export const DishType = styled.Text`
+  font-size: 14;
+  color: ${colors.darkGray};
+  margin-left: 16;
+`;
+
 export const ServingsContainer = styled.View`
   justify-content: space-between;
   display: flex;

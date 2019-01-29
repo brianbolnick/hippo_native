@@ -56,6 +56,10 @@ export const tempRecipes = [
       name: "Italian",
       id: 1
     },
+    dish_type: {
+      name: "Main",
+      id: 1
+    },
     calories: "343",
     rating: 3.4
   },
@@ -118,6 +122,11 @@ export const tempRecipes = [
       name: "Italian",
       id: 1
     },
+    dish_type: {
+      name: "Main",
+      id: 1
+    },
+
     calories: "343",
     rating: 3.4
   },
@@ -175,6 +184,10 @@ export const tempRecipes = [
     cook_time: "1 Hour",
     category: {
       name: "Breakfast",
+      id: 1
+    },
+    dish_type: {
+      name: "Main",
       id: 1
     },
     calories: "343",
@@ -236,6 +249,11 @@ export const tempRecipes = [
       name: "American",
       id: 1
     },
+    dish_type: {
+      name: "Main",
+      id: 1
+    },
+
     calories: "343",
     rating: 3.4
   }

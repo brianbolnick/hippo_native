@@ -33,7 +33,9 @@ import {
   ServingsGroup,
   ServingSize,
   ChangeServingGroup,
-  ServingLabel
+  ServingLabel,
+  TypeContainer,
+  DishType
 } from "./ShowRecipeStyledComponents";
 import ServingsForm from "./ServingsForm";
 const PlaceholderImage = require("images/recipe-placeholder.png");
@@ -167,7 +169,10 @@ class ShowRecipe extends React.Component {
             <MetaContainer>
               <CategoryContainer>
                 <Icon name="tags" size={28} color={colors.black} />
-                <Category>{data.category.name}</Category>
+                <TypeContainer>
+                  <Category>{data.category.name}</Category>
+                  <DishType>{data.dish_type.name}</DishType>
+                </TypeContainer>
               </CategoryContainer>
               <RatingContainer>
                 <Rating value={data.rating} />
