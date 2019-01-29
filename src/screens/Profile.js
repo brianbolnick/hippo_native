@@ -1,4 +1,3 @@
-//import React from "react";
 import React from "react";
 import {
   Text,
@@ -105,6 +104,15 @@ class Profile extends React.Component {
                 label="SIGN OUT"
                 onPress={() =>
                   onSignOut().then(() => navigation.navigate("SignedOut"))
+                }
+              />
+              <Button
+                label="Contact Support"
+                tertiary
+                onPress={() =>
+                  Linking.openURL(
+                    "mailto:brianbolnick+hippo@gmail.com?subject=Hungry Hippo Support Request"
+                  )
                 }
               />
             </ButtonContainer>
