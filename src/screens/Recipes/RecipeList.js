@@ -12,9 +12,16 @@ import { tempRecipes } from "./helper";
 import { getDataFromAs, API_URL } from "utils";
 import * as keys from "utils/constants";
 import * as colors from "utils/Colors";
+import SearchBar from "components/SearchBar";
 
 export default class RecipeList extends React.Component {
-  state = { recipes: [], sharedRecipes: [], loading: true };
+  state = {
+    filteredRecipes: [],
+    filteredSharedRecipes: [],
+    recipes: [],
+    sharedRecipes: [],
+    loading: true
+  };
 
   getRecipes = (userId, familyId, authToken, recipeType) => {
     return axios.get(`${API_URL}/family/${familyId}/${recipeType}`, {
@@ -43,12 +50,39 @@ export default class RecipeList extends React.Component {
       });
   }
 
+  filterRecipes = (recipes, text) => {
+    return recipes.filter(recipe => {
+      return recipe.title.toLowerCase().search(text.toLowerCase()) >= 0;
+    });
+  };
+
+  handleSearchChange = text => {
+    if (text.length <= 3) {
+      this.setState({ filteredRecipes: [], filteredSharedRecipes: [] });
+    } else {
+      const filteredRecipes = this.filterRecipes([...this.state.recipes], text);
+      const filteredSharedRecipes = this.filterRecipes(
+        [...this.state.sharedRecipes],
+        text
+      );
+      console.log("norm", filteredRecipes);
+      console.log("shared", filteredSharedRecipes);
+      this.setState({ filteredRecipes, filteredSharedRecipes });
+    }
+  };
+
   render() {
     const { navigation } = this.props;
-    const { recipes, sharedRecipes, loading } = this.state;
+    const {
+      recipes,
+      sharedRecipes,
+      filteredRecipes,
+      filteredSharedRecipes,
+      loading
+    } = this.state;
 
-    const renderCards = recipes => {
-      if (recipes === this.state.sharedRecipes) {
+    const renderCards = (recipes, showTemp) => {
+      if (!showTemp) {
         return (
           recipes &&
           recipes.map((data, index) => (
@@ -70,6 +104,11 @@ export default class RecipeList extends React.Component {
       ));
     };
 
+    const recipeMap = filteredRecipes.length ? filteredRecipes : recipes;
+    const sharedRecipeMap = filteredSharedRecipes.length
+      ? filteredSharedRecipes
+      : sharedRecipes;
+
     return (
       <View style={{ flex: 1, paddingTop: 50 }}>
         {loading ? (
@@ -89,6 +128,10 @@ export default class RecipeList extends React.Component {
               justifyContent: "center"
             }}
           >
+            <SearchBar
+              onChange={this.handleSearchChange}
+              placeholder="Search Recipes"
+            />
             {!recipes.length && (
               <View>
                 <EmptyTextTitle>You don't have any recipes yet.</EmptyTextTitle>
@@ -98,9 +141,11 @@ export default class RecipeList extends React.Component {
               </View>
             )}
             <SectionTitle>Family Recipes</SectionTitle>
-            <CardsContainer>{renderCards(recipes)}</CardsContainer>
+            <CardsContainer>{renderCards(recipeMap, true)}</CardsContainer>
             <SectionTitle>Recipes Shared With Me</SectionTitle>
-            <CardsContainer>{renderCards(sharedRecipes)}</CardsContainer>
+            <CardsContainer>
+              {renderCards(sharedRecipeMap, false)}
+            </CardsContainer>
           </ScrollView>
         )}
       </View>
