@@ -20,7 +20,8 @@ export default class RecipeList extends React.Component {
     filteredSharedRecipes: [],
     recipes: [],
     sharedRecipes: [],
-    loading: true
+    loading: true,
+    filtersSet: false
   };
 
   getRecipes = (userId, familyId, authToken, recipeType) => {
@@ -58,16 +59,24 @@ export default class RecipeList extends React.Component {
 
   handleSearchChange = text => {
     if (text.length <= 3) {
-      this.setState({ filteredRecipes: [], filteredSharedRecipes: [] });
+      this.setState({
+        filtersSet: false,
+        filteredRecipes: [],
+        filteredSharedRecipes: []
+      });
     } else {
       const filteredRecipes = this.filterRecipes([...this.state.recipes], text);
       const filteredSharedRecipes = this.filterRecipes(
         [...this.state.sharedRecipes],
         text
       );
-      console.log("norm", filteredRecipes);
-      console.log("shared", filteredSharedRecipes);
-      this.setState({ filteredRecipes, filteredSharedRecipes });
+      //console.log("norm", filteredRecipes);
+      //console.log("shared", filteredSharedRecipes);
+      this.setState({
+        filteredRecipes,
+        filteredSharedRecipes,
+        filtersSet: true
+      });
     }
   };
 
@@ -78,7 +87,8 @@ export default class RecipeList extends React.Component {
       sharedRecipes,
       filteredRecipes,
       filteredSharedRecipes,
-      loading
+      loading,
+      filtersSet
     } = this.state;
 
     const renderCards = (recipes, showTemp) => {
@@ -94,7 +104,8 @@ export default class RecipeList extends React.Component {
           ))
         );
       }
-      const recipeMap = recipes.length ? recipes : tempRecipes;
+      const recipeMap =
+        recipes.length || this.state.filtersSet ? recipes : tempRecipes;
       return recipeMap.map((data, index) => (
         <RecipeCard
           data={data}
@@ -104,10 +115,8 @@ export default class RecipeList extends React.Component {
       ));
     };
 
-    const recipeMap = filteredRecipes.length ? filteredRecipes : recipes;
-    const sharedRecipeMap = filteredSharedRecipes.length
-      ? filteredSharedRecipes
-      : sharedRecipes;
+    const recipeMap = filtersSet ? filteredRecipes : recipes;
+    const sharedRecipeMap = filtersSet ? filteredSharedRecipes : sharedRecipes;
 
     return (
       <View style={{ flex: 1, paddingTop: 50 }}>
