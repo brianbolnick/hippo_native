@@ -2,6 +2,7 @@ import React from "react";
 import { Text, View, TextInput } from "react-native";
 import * as colors from "utils/Colors";
 import styled from "styled-components";
+import Icon from "components/Icon";
 
 const StyledInput = styled.TextInput`
   padding-top: 10;
@@ -15,12 +16,21 @@ const StyledInput = styled.TextInput`
   padding-vertical: 8;
   padding-horizontal: 16;
   width: 100%;
+  padding-left: 36;
 `;
 
 const Container = styled.View`
   width: 100%;
   padding-horizontal: 8;
   margin-bottom: 32;
+  position: relative;
+`;
+
+const StyledIcon = styled(Icon)`
+  position: absolute;
+  top: 12;
+  z-index: 4;
+  left: 16;
 `;
 
 export default class SearchBar extends React.Component {
@@ -34,7 +44,9 @@ export default class SearchBar extends React.Component {
 
     return (
       <Container>
+        <StyledIcon color={colors.mutedGray} name="search" size={18} />
         <StyledInput
+          icon="search"
           isFocused={isFocused}
           onChangeText={onChange}
           placeholder={placeholder}
