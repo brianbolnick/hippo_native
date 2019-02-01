@@ -1,6 +1,17 @@
 import styled from "styled-components";
 import * as colors from "utils/Colors";
 import { Text, View, Image, TouchableHighlight } from "react-native";
+import SearchBar from "components/SearchBar";
+import Icon from "components/Icon";
+
+export const FilterIcon = styled(Icon)`
+  margin-horizontal: 16;
+  padding-vertical: 8;
+`;
+
+export const FiltersContainer = styled.View`
+  flex-direction: row;
+`;
 
 export const EmptyTextTitle = styled.Text`
   text-align: center;

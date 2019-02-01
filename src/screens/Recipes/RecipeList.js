@@ -1,11 +1,20 @@
 import React from "react";
-import { ActivityIndicator, ScrollView, Text, View } from "react-native";
+import {
+  Modal,
+  TouchableHighlight,
+  ActivityIndicator,
+  ScrollView,
+  Text,
+  View
+} from "react-native";
 import axios from "axios";
 import {
   EmptyTextTitle,
   EmptyTextSub,
   SectionTitle,
-  CardsContainer
+  CardsContainer,
+  FiltersContainer,
+  FilterIcon
 } from "./RecipeCardStyledComponents";
 import RecipeCard from "./RecipeCard";
 import { tempRecipes } from "./helper";
@@ -13,6 +22,8 @@ import { getDataFromAs, API_URL } from "utils";
 import * as keys from "utils/constants";
 import * as colors from "utils/Colors";
 import SearchBar from "components/SearchBar";
+import Icon from "components/Icon";
+import FilterModal from "./FilterModal";
 
 export default class RecipeList extends React.Component {
   state = {
@@ -21,7 +32,8 @@ export default class RecipeList extends React.Component {
     recipes: [],
     sharedRecipes: [],
     loading: true,
-    filtersSet: false
+    filtersSet: false,
+    showFilterModal: false
   };
 
   getRecipes = (userId, familyId, authToken, recipeType) => {
@@ -51,33 +63,67 @@ export default class RecipeList extends React.Component {
       });
   }
 
-  filterRecipes = (recipes, text) => {
+  filterRecipesByText = (recipes, filter) => {
     return recipes.filter(recipe => {
-      return recipe.title.toLowerCase().search(text.toLowerCase()) >= 0;
+      return recipe.title.toLowerCase().search(filter.toLowerCase()) >= 0;
+    });
+  };
+
+  filterRecipesByAttribute = (recipes, filter, attr) => {
+    return recipes.filter(recipe => {
+      return recipe[attr].id == filter;
     });
   };
 
   handleSearchChange = text => {
-    if (text.length <= 3) {
+    if (text.length < 3) {
       this.setState({
         filtersSet: false,
         filteredRecipes: [],
         filteredSharedRecipes: []
       });
     } else {
-      const filteredRecipes = this.filterRecipes([...this.state.recipes], text);
-      const filteredSharedRecipes = this.filterRecipes(
-        [...this.state.sharedRecipes],
-        text
+      const filteredRecipes = this.filterRecipesByText(
+        [...this.state.recipes],
+        text,
+        "title"
       );
-      //console.log("norm", filteredRecipes);
-      //console.log("shared", filteredSharedRecipes);
+      const filteredSharedRecipes = this.filterRecipesByText(
+        [...this.state.sharedRecipes],
+        text,
+        "title"
+      );
       this.setState({
         filteredRecipes,
         filteredSharedRecipes,
         filtersSet: true
       });
     }
+  };
+
+  setModalVisible = visible => {
+    this.setState({ showFilterModal: visible });
+  };
+
+  handleApplyFilters = filters => {
+    let filteredRecipes = [...this.state.recipes];
+    let filteredSharedRecipes = [...this.state.sharedRecipes];
+
+    Object.keys(filters).forEach(filter => {
+      filteredRecipes = this.filterRecipesByAttribute(
+        filteredRecipes,
+        filters[filter],
+        filter
+      );
+      filteredSharedRecipes = this.filterRecipesByAttribute(
+        filteredSharedRecipes,
+        filters[filter],
+        filter
+      );
+    });
+    console.log("FILTERED STUFF!", filteredRecipes);
+    this.setModalVisible(!this.state.showFilterModal);
+    this.setState({ filteredSharedRecipes, filteredRecipes, filtersSet: true });
   };
 
   render() {
@@ -88,7 +134,8 @@ export default class RecipeList extends React.Component {
       filteredRecipes,
       filteredSharedRecipes,
       loading,
-      filtersSet
+      filtersSet,
+      showFilterModal
     } = this.state;
 
     const renderCards = (recipes, showTemp) => {
@@ -137,10 +184,28 @@ export default class RecipeList extends React.Component {
               justifyContent: "center"
             }}
           >
-            <SearchBar
-              onChange={this.handleSearchChange}
-              placeholder="Search Recipes"
+            <FilterModal
+              visible={showFilterModal}
+              onRequestClose={filters => console.log("close", filters)}
+              onApplyFilters={this.handleApplyFilters}
+              onCancelRequest={() => {
+                this.setModalVisible(false);
+                this.setState({ filtersSet: false });
+              }}
+              filtersSet={filtersSet}
             />
+            <FiltersContainer>
+              <SearchBar
+                onChange={this.handleSearchChange}
+                placeholder="Search Recipes"
+              />
+              <FilterIcon
+                name="filter"
+                size={28}
+                color={filtersSet ? colors.red : colors.mutedGray}
+                onPress={() => this.setModalVisible(!showFilterModal)}
+              />
+            </FiltersContainer>
             {!recipes.length && (
               <View>
                 <EmptyTextTitle>You don't have any recipes yet.</EmptyTextTitle>

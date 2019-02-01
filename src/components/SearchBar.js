@@ -20,10 +20,11 @@ const StyledInput = styled.TextInput`
 `;
 
 const Container = styled.View`
-  width: 100%;
+  width: 80%;
   padding-horizontal: 8;
   margin-bottom: 32;
   position: relative;
+  align-self: flex-start;
 `;
 
 const StyledIcon = styled(Icon)`
