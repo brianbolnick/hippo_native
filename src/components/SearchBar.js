@@ -20,7 +20,7 @@ const StyledInput = styled.TextInput`
 `;
 
 const Container = styled.View`
-  width: 80%;
+  width: 85%;
   padding-horizontal: 8;
   margin-bottom: 32;
   position: relative;

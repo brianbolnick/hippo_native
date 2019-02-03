@@ -4,8 +4,13 @@ import { Text, View, Image, TouchableHighlight } from "react-native";
 import SearchBar from "components/SearchBar";
 import Icon from "components/Icon";
 
+export const DishTypeScroll = styled.ScrollView`
+  margin-bottom: 32;
+  margin-left: 8;
+`;
+
 export const FilterIcon = styled(Icon)`
-  margin-horizontal: 16;
+  margin-horizontal: 8;
   padding-vertical: 8;
 `;
 
@@ -31,12 +36,13 @@ export const EmptyTextSub = styled.Text`
   padding-horizontal: 16;
 `;
 export const SectionTitle = styled.Text`
-  text-align: center;
+  text-align: left;
+  align-self: flex-start;
   margin-top: 8;
-  margin-bottom: 24;
+  margin-vertical: 8;
   font-size: 18px;
-  font-weight: 700;
-  color: ${colors.darkGray};
+  font-weight: 800;
+  color: ${colors.black};
   padding-horizontal: 16;
 `;
 
@@ -51,12 +57,12 @@ export const CardsContainer = styled.View`
 export const Card = styled.TouchableHighlight`
   border-radius: 4px;
   background-color: white;
-  margin: 10px 4px;
+  margin: 10px 8px;
   shadow-opacity: 0.2;
   shadow-radius: 10px;
   shadow-color: black;
   shadow-offset: 0px 5px;
-  flex-basis: 45%;
+  width: 150;
 `;
 
 export const RecipeImage = styled.Image`

@@ -14,7 +14,8 @@ import {
   SectionTitle,
   CardsContainer,
   FiltersContainer,
-  FilterIcon
+  FilterIcon,
+  DishTypeScroll
 } from "./RecipeCardStyledComponents";
 import RecipeCard from "./RecipeCard";
 import { tempRecipes } from "./helper";
@@ -126,6 +127,52 @@ export default class RecipeList extends React.Component {
     this.setState({ filteredSharedRecipes, filteredRecipes, filtersSet: true });
   };
 
+  renderDishTypes = () => {
+    const {
+      filtersSet,
+      recipes,
+      filteredRecipes,
+      sharedRecipes,
+      filteredSharedRecipes
+    } = this.state;
+    const recipeMap = filtersSet ? filteredRecipes : recipes;
+    const sharedRecipeMap = filtersSet ? filteredSharedRecipes : sharedRecipes;
+    const categoryMap = {};
+
+    recipeMap.forEach(recipe => {
+      if (!categoryMap[recipe.dish_type.name]) {
+        categoryMap[recipe.dish_type.name] = [recipe];
+      } else {
+        categoryMap[recipe.dish_type.name].push(recipe);
+      }
+    });
+
+    return this.renderCategories(categoryMap);
+  };
+
+  renderCategories = categoryMap => {
+    return Object.keys(categoryMap).map(category => {
+      const dishMap = categoryMap[category].map((data, index) => (
+        <RecipeCard
+          data={data}
+          key={
+            data.id == 0 ? `0-${index}-${category}` : `${data.id}-${category}`
+          }
+          navigation={this.props.navigation}
+        />
+      ));
+
+      return (
+        <React.Fragment key={category}>
+          <SectionTitle>{category}</SectionTitle>
+          <DishTypeScroll horizontal showsHorizontalScrollIndicator={false}>
+            {dishMap}
+          </DishTypeScroll>
+        </React.Fragment>
+      );
+    });
+  };
+
   render() {
     const { navigation } = this.props;
     const {
@@ -180,7 +227,7 @@ export default class RecipeList extends React.Component {
         ) : (
           <ScrollView
             contentContainerStyle={{
-              alignItems: "center",
+              alignItems: "flex-start",
               justifyContent: "center"
             }}
           >
@@ -214,12 +261,17 @@ export default class RecipeList extends React.Component {
                 </EmptyTextSub>
               </View>
             )}
-            <SectionTitle>Family Recipes</SectionTitle>
-            <CardsContainer>{renderCards(recipeMap, true)}</CardsContainer>
+            {this.renderDishTypes()}
+            {/*<SectionTitle>Family Recipes</SectionTitle>
+						<CardsContainer>
+					{renderCards(recipeMap, true)}
+					</CardsContainer>
+					
             <SectionTitle>Recipes Shared With Me</SectionTitle>
             <CardsContainer>
               {renderCards(sharedRecipeMap, false)}
             </CardsContainer>
+*/}
           </ScrollView>
         )}
       </View>
