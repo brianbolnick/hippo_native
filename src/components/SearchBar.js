@@ -5,31 +5,31 @@ import styled from "styled-components";
 import Icon from "components/Icon";
 
 const StyledInput = styled.TextInput`
-  padding-top: 10;
-  font-size: 18;
+  padding-top: 8;
+  font-size: 16;
   color: ${colors.black};
   font-weight: 600;
   border-color: ${({ isFocused }) =>
     isFocused ? colors.red : colors.darkGray};
   border-width: 1px;
   border-radius: 8;
-  padding-vertical: 8;
-  padding-horizontal: 16;
+  padding-vertical: 6;
+  padding-horizontal: 14;
   width: 100%;
-  padding-left: 36;
+  padding-left: 32;
 `;
 
 const Container = styled.View`
-  width: 85%;
+  width: 88%;
   padding-horizontal: 8;
-  margin-bottom: 32;
+  margin-bottom: 8;
   position: relative;
   align-self: flex-start;
 `;
 
 const StyledIcon = styled(Icon)`
   position: absolute;
-  top: 12;
+  top: 10;
   z-index: 4;
   left: 16;
 `;
@@ -45,7 +45,7 @@ export default class SearchBar extends React.Component {
 
     return (
       <Container>
-        <StyledIcon color={colors.mutedGray} name="search" size={18} />
+        <StyledIcon color={colors.mutedGray} name="search" size={16} />
         <StyledInput
           icon="search"
           isFocused={isFocused}

@@ -11,11 +11,18 @@ export const DishTypeScroll = styled.ScrollView`
 
 export const FilterIcon = styled(Icon)`
   margin-horizontal: 8;
-  padding-vertical: 8;
+  padding-vertical: 3;
+  margin-right: 16;
 `;
 
 export const FiltersContainer = styled.View`
   flex-direction: row;
+  width: 100%;
+  justify-content: space-around;
+  border-bottom-width: 1;
+  border-bottom-color: ${colors.mutedGray};
+  padding-bottom: 4;
+  background-color: ${colors.white};
 `;
 
 export const EmptyTextTitle = styled.Text`
@@ -38,7 +45,6 @@ export const EmptyTextSub = styled.Text`
 export const SectionTitle = styled.Text`
   text-align: left;
   align-self: flex-start;
-  margin-top: 8;
   margin-vertical: 8;
   font-size: 18px;
   font-weight: 800;

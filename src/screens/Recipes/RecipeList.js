@@ -146,6 +146,14 @@ export default class RecipeList extends React.Component {
       }
     });
 
+    sharedRecipeMap.forEach(recipe => {
+      if (!categoryMap[recipe.dish_type.name]) {
+        categoryMap[recipe.dish_type.name] = [recipe];
+      } else {
+        categoryMap[recipe.dish_type.name].push(recipe);
+      }
+    });
+
     return this.renderCategories(categoryMap);
   };
 
@@ -227,12 +235,7 @@ export default class RecipeList extends React.Component {
             <ActivityIndicator size="large" color={colors.black} />
           </View>
         ) : (
-          <ScrollView
-            contentContainerStyle={{
-              alignItems: "flex-start",
-              justifyContent: "center"
-            }}
-          >
+          <ScrollView stickyHeaderIndices={[1]}>
             <FilterModal
               visible={showFilterModal}
               onRequestClose={filters => console.log("close", filters)}
