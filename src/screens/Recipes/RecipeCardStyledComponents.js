@@ -5,9 +5,8 @@ import SearchBar from "components/SearchBar";
 import Icon from "components/Icon";
 
 export const DishTypeScroll = styled.ScrollView`
-  margin-bottom: 8;
   padding-horizontal: 8;
-  padding-bottom: 24;
+  padding-bottom: 16;
 `;
 
 export const FilterIcon = styled(Icon)`
