@@ -5,7 +5,8 @@ import {
   ActivityIndicator,
   ScrollView,
   Text,
-  View
+  View,
+  Picker
 } from "react-native";
 import axios from "axios";
 import {
@@ -33,8 +34,6 @@ export const ScreenContainer = styled.View`
   justify-content: space-around;
 `;
 
-`
-`;
 export const ButtonContainer = styled.View`
   display: flex;
   justify-content: center;
@@ -45,8 +44,81 @@ export const ButtonContainer = styled.View`
   width: 300;
 `;
 
+const InputContainer = styled.View`
+  justify-content: center;
+`;
+
+const StyledPicker = styled(Picker)``;
+
+const Label = styled.Text`
+  margin-bottom: 8;
+  font-size: 18;
+  font-weight: 900;
+`;
+
 class FilterModal extends React.Component {
-  state = { category: 1, dish_type: 1 };
+  state = { categories: [], dishTypes: [], category: 1 };
+
+  getCategories = authToken => {
+    return axios.get(`${API_URL}/categories`, {
+      headers: { Authorization: `Bearer ${authToken}` }
+    });
+  };
+
+  getDishTypes = authToken => {
+    return axios.get(`${API_URL}/dish_types`, {
+      headers: { Authorization: `Bearer ${authToken}` }
+    });
+  };
+
+  async componentDidMount() {
+    const { authToken } = await getDataFromAs();
+
+    axios
+      .all([this.getCategories(authToken), this.getDishTypes(authToken)])
+      .then(
+        axios.spread((categoryData, dishTypeData) => {
+          const categories = categoryData.data.data;
+          const dishTypes = dishTypeData.data.data;
+          this.setState({ categories, dishTypes });
+        })
+      )
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  renderDishTypes = () => {
+    const { dishTypes } = this.state;
+    return dishTypes.map(dishType => {
+      return (
+        <Picker.Item
+          key={`dishType|${dishType.id}`}
+          value={dishType.id}
+          label={dishType.name}
+        />
+      );
+    });
+  };
+
+  renderCategories = () => {
+    const { categories } = this.state;
+    return categories.map(category => {
+      return (
+        <Picker.Item
+          key={`category|${category.id}`}
+          value={category.id}
+          label={category.name}
+        />
+      );
+    });
+  };
+
+  handleSubmit = () => {
+    const { category, dish_type } = this.state;
+    console.log({ category, dish_type });
+    this.props.onApplyFilters({ category });
+  };
 
   render() {
     const {
@@ -64,11 +136,30 @@ class FilterModal extends React.Component {
         onRequestClose={() => console.log("closed")}
       >
         <ScreenContainer style={{ marginTop: 22 }}>
+          <InputContainer>
+            <Label>Category</Label>
+            <StyledPicker
+              selectedValue={this.state.category}
+              onValueChange={(value, index) => {
+                this.setState({ category: value });
+              }}
+            >
+              {this.renderCategories()}
+            </StyledPicker>
+            {/*
+            <Label>Dish Type</Label>
+            <StyledPicker
+              selectedValue={this.state.dish_type}
+              onValueChange={(value, index) => {
+                this.setState({ dish_type: value });
+              }}
+            >
+              {this.renderDishTypes()}
+            </StyledPicker>
+						*/}
+          </InputContainer>
           <ButtonContainer>
-            <Button
-              label="Apply Filters"
-              onPress={() => onApplyFilters(this.state)}
-            />
+            <Button label="Apply Filters" onPress={this.handleSubmit} />
             <Button
               label={filtersSet ? "Remove Filters" : "Cancel"}
               tertiary

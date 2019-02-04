@@ -111,18 +111,19 @@ export default class RecipeList extends React.Component {
     let filteredSharedRecipes = [...this.state.sharedRecipes];
 
     Object.keys(filters).forEach(filter => {
-      filteredRecipes = this.filterRecipesByAttribute(
-        filteredRecipes,
-        filters[filter],
-        filter
-      );
-      filteredSharedRecipes = this.filterRecipesByAttribute(
-        filteredSharedRecipes,
-        filters[filter],
-        filter
-      );
+      if (filter) {
+        filteredRecipes = this.filterRecipesByAttribute(
+          filteredRecipes,
+          filters[filter],
+          filter
+        );
+        filteredSharedRecipes = this.filterRecipesByAttribute(
+          filteredSharedRecipes,
+          filters[filter],
+          filter
+        );
+      }
     });
-    console.log("FILTERED STUFF!", filteredRecipes);
     this.setModalVisible(!this.state.showFilterModal);
     this.setState({ filteredSharedRecipes, filteredRecipes, filtersSet: true });
   };
@@ -173,6 +174,31 @@ export default class RecipeList extends React.Component {
     });
   };
 
+  renderCards = (recipes, showTemp) => {
+    const { navigation } = this.props;
+    if (!showTemp) {
+      return (
+        recipes &&
+        recipes.map((data, index) => (
+          <RecipeCard
+            data={data}
+            key={data.id == 0 ? `0-${index}` : data.id}
+            navigation={navigation}
+          />
+        ))
+      );
+    }
+    const recipeMap =
+      recipes.length || this.state.filtersSet ? recipes : tempRecipes;
+    return recipeMap.map((data, index) => (
+      <RecipeCard
+        data={data}
+        key={data.id == 0 ? `0-${index}` : data.id}
+        navigation={navigation}
+      />
+    ));
+  };
+
   render() {
     const { navigation } = this.props;
     const {
@@ -185,32 +211,10 @@ export default class RecipeList extends React.Component {
       showFilterModal
     } = this.state;
 
-    const renderCards = (recipes, showTemp) => {
-      if (!showTemp) {
-        return (
-          recipes &&
-          recipes.map((data, index) => (
-            <RecipeCard
-              data={data}
-              key={data.id == 0 ? `0-${index}` : data.id}
-              navigation={navigation}
-            />
-          ))
-        );
-      }
-      const recipeMap =
-        recipes.length || this.state.filtersSet ? recipes : tempRecipes;
-      return recipeMap.map((data, index) => (
-        <RecipeCard
-          data={data}
-          key={data.id == 0 ? `0-${index}` : data.id}
-          navigation={navigation}
-        />
-      ));
-    };
-
     const recipeMap = filtersSet ? filteredRecipes : recipes;
     const sharedRecipeMap = filtersSet ? filteredSharedRecipes : sharedRecipes;
+
+    const isBeta = recipeMap.length && recipeMap[0].user.is_beta;
 
     return (
       <View style={{ flex: 1, paddingTop: 50 }}>
@@ -261,17 +265,21 @@ export default class RecipeList extends React.Component {
                 </EmptyTextSub>
               </View>
             )}
-            {this.renderDishTypes()}
-            {/*<SectionTitle>Family Recipes</SectionTitle>
-						<CardsContainer>
-					{renderCards(recipeMap, true)}
-					</CardsContainer>
-					
-            <SectionTitle>Recipes Shared With Me</SectionTitle>
-            <CardsContainer>
-              {renderCards(sharedRecipeMap, false)}
-            </CardsContainer>
-*/}
+            {!isBeta ? (
+              this.renderDishTypes()
+            ) : (
+              <React.Fragment>
+                <SectionTitle>Family Recipes</SectionTitle>
+                <CardsContainer>
+                  {this.renderCards(recipeMap, true)}
+                </CardsContainer>
+
+                <SectionTitle>Recipes Shared With Me</SectionTitle>
+                <CardsContainer>
+                  {this.renderCards(sharedRecipeMap, false)}
+                </CardsContainer>
+              </React.Fragment>
+            )}
           </ScrollView>
         )}
       </View>
