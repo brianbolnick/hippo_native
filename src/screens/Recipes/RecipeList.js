@@ -111,18 +111,16 @@ export default class RecipeList extends React.Component {
     let filteredSharedRecipes = [...this.state.sharedRecipes];
 
     Object.keys(filters).forEach(filter => {
-      if (filter) {
-        filteredRecipes = this.filterRecipesByAttribute(
-          filteredRecipes,
-          filters[filter],
-          filter
-        );
-        filteredSharedRecipes = this.filterRecipesByAttribute(
-          filteredSharedRecipes,
-          filters[filter],
-          filter
-        );
-      }
+      filteredRecipes = this.filterRecipesByAttribute(
+        filteredRecipes,
+        filters[filter],
+        filter
+      );
+      filteredSharedRecipes = this.filterRecipesByAttribute(
+        filteredSharedRecipes,
+        filters[filter],
+        filter
+      );
     });
     this.setModalVisible(!this.state.showFilterModal);
     this.setState({ filteredSharedRecipes, filteredRecipes, filtersSet: true });
