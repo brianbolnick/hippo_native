@@ -90,6 +90,15 @@ class Profile extends React.Component {
     return !user.name ? (
       <ScreenContainer behavior="padding" style={styles.container}>
         <ActivityIndicator size="large" color={colors.black} />
+
+        <ButtonContainer>
+          <StyledButton
+            label="SIGN OUT"
+            onPress={() =>
+              onSignOut().then(() => navigation.navigate("SignedOut"))
+            }
+          />
+        </ButtonContainer>
       </ScreenContainer>
     ) : (
       <ScreenContainer behavior="padding" style={styles.container}>
