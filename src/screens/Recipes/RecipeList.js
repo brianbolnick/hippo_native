@@ -225,70 +225,64 @@ export default class RecipeList extends React.Component {
 
     const isBeta = recipeMap.length && recipeMap[0].user.is_beta;
 
-    return (
-      <View style={{ flex: 1 }}>
-        {loading ? (
-          <View
-            style={{
-              alignItems: "center",
-              marginTop: 200,
-              justifyContent: "center"
-            }}
-          >
-            <ActivityIndicator size="large" color={colors.black} />
-          </View>
-        ) : (
-          <ScrollView stickyHeaderIndices={[1]}>
-            <FilterModal
-              visible={showFilterModal}
-              onRequestClose={filters => console.log("close", filters)}
-              onApplyFilters={this.handleApplyFilters}
-              onCancelRequest={() => {
-                this.setModalVisible(false);
-                this.setState({ filtersSet: false });
-              }}
-              filtersSet={filtersSet}
-            />
-            <FiltersContainer>
-              <HeaderTextContainer>
-                <PageTitle>Browse</PageTitle>
-                <FilterLink
-                  onPress={() => this.setModalVisible(!showFilterModal)}
-                >
-                  Filter
-                </FilterLink>
-              </HeaderTextContainer>
-              <SearchBar
-                onChange={this.handleSearchChange}
-                placeholder="Search Recipes"
-              />
-            </FiltersContainer>
-            {!recipes.length && (
-              <View>
-                <EmptyTextTitle>You don't have any recipes yet.</EmptyTextTitle>
-                <EmptyTextSub>
-                  Here are some samples until you create your own.
-                </EmptyTextSub>
-              </View>
-            )}
-            {!isBeta ? (
-              this.renderDishTypes()
-            ) : (
-              <React.Fragment>
-                <SectionTitle>Family Recipes</SectionTitle>
-                <CardsContainer>
-                  {this.renderCards(recipeMap, true)}
-                </CardsContainer>
-
-                <SectionTitle>Recipes Shared With Me</SectionTitle>
-                <CardsContainer>
-                  {this.renderCards(sharedRecipeMap, false)}
-                </CardsContainer>
-              </React.Fragment>
-            )}
-          </ScrollView>
-        )}
+    return loading ? (
+      <View style={{ flex: 1, backgroundColor: colors.red }}>
+        <View
+          style={{
+            alignItems: "center",
+            marginTop: 200,
+            justifyContent: "center"
+          }}
+        >
+          <ActivityIndicator size="large" color={colors.black} />
+        </View>
       </View>
+    ) : (
+      <ScrollView stickyHeaderIndices={[1]} style={{ flex: 1 }}>
+        <FilterModal
+          visible={showFilterModal}
+          onRequestClose={filters => console.log("close", filters)}
+          onApplyFilters={this.handleApplyFilters}
+          onCancelRequest={() => {
+            this.setModalVisible(false);
+            this.setState({ filtersSet: false });
+          }}
+          filtersSet={filtersSet}
+        />
+        <FiltersContainer>
+          <HeaderTextContainer>
+            <PageTitle>Browse</PageTitle>
+            <FilterLink onPress={() => this.setModalVisible(!showFilterModal)}>
+              Filter
+            </FilterLink>
+          </HeaderTextContainer>
+          <SearchBar
+            onChange={this.handleSearchChange}
+            placeholder="Search Recipes"
+          />
+        </FiltersContainer>
+        {!recipes.length && (
+          <View>
+            <EmptyTextTitle>You don't have any recipes yet.</EmptyTextTitle>
+            <EmptyTextSub>
+              Here are some samples until you create your own.
+            </EmptyTextSub>
+          </View>
+        )}
+        {!isBeta ? (
+          this.renderDishTypes()
+        ) : (
+          <React.Fragment>
+            <SectionTitle>Family Recipes</SectionTitle>
+            <CardsContainer>{this.renderCards(recipeMap, true)}</CardsContainer>
+
+            <SectionTitle>Recipes Shared With Me</SectionTitle>
+            <CardsContainer>
+              {this.renderCards(sharedRecipeMap, false)}
+            </CardsContainer>
+          </React.Fragment>
+        )}
+      </ScrollView>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Platform, StatusBar } from "react-native";
+import { View, Platform, StatusBar } from "react-native";
 import {
   createBottomTabNavigator,
   createStackNavigator,
@@ -7,8 +7,9 @@ import {
   createAppContainer
 } from "react-navigation";
 import Icon from "components/Icon";
+import { IconShare, IconUser } from "components/CustomIcon";
 import * as colors from "utils/Colors";
-
+import styled from "styled-components";
 import SignUp from "screens/Auth/SignUp";
 import FamilyCodeIntro from "screens/Auth/FamilyCodeIntro";
 import FamilyCodeNew from "screens/Auth/FamilyCodeNew";
@@ -28,6 +29,21 @@ import Profile from "screens/Profile";
 const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
 };
+
+const NewIconView = styled.View`
+  background-color: ${colors.red};
+  padding-vertical: 16;
+  padding-horizontal: 16;
+  border-radius: 50;
+  position: relative;
+  bottom: 8;
+`;
+
+const NewIcon = ({ tintColor, ...rest }) => (
+  <NewIconView>
+    <Icon name="plus" size={32} color={tintColor} />
+  </NewIconView>
+);
 
 export const SignedOut = createStackNavigator({
   Welcome: {
@@ -108,9 +124,7 @@ export const Recipe = createBottomTabNavigator(
       screen: ShareRecipe,
       navigationOptions: {
         tabBarLabel: "Share",
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="share" size={24} color={tintColor} />
-        )
+        tabBarIcon: ({ tintColor }) => <IconShare size={24} color={tintColor} />
       }
     }
   },
@@ -152,9 +166,7 @@ export const SignedIn = createBottomTabNavigator(
       screen: Profile,
       navigationOptions: {
         tabBarLabel: "Profile",
-        tabBarIcon: ({ tintColor }) => (
-          <Icon name="user" size={24} color={tintColor} />
-        )
+        tabBarIcon: ({ tintColor }) => <IconUser size={24} color={tintColor} />
       }
     }
   },
