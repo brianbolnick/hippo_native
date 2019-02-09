@@ -29,6 +29,8 @@ export default class App extends React.Component {
   async componentDidMount() {
     await Font.loadAsync({
       rufina: require("../assets/fonts/Rufina-Regular.ttf"),
+      avenir: require("../assets/fonts/AvenirNext.otf"),
+      "avenir-bold": require("../assets/fonts/AvenirNextBold.otf"),
       "rufina-bold": require("../assets/fonts/Rufina-Bold.ttf")
     });
 

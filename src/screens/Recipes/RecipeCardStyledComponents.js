@@ -7,14 +7,15 @@ import Icon from "components/Icon";
 export const PageTitle = styled.Text`
   color: ${colors.white};
   font-size: 32;
-  font-weight: 700;
+  font-weight: 900;
+  font-family: avenir-bold;
+  margin-top: 4px;
 `;
 
 export const FilterLink = styled.Text`
   color: ${colors.white};
   font-weight: 500;
   font-size: 18;
-  margin-top: 8;
 `;
 
 export const HeaderTextContainer = styled.View`
