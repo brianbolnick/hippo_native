@@ -7,10 +7,10 @@ import Icon from "components/Icon";
 const StyledInput = styled.TextInput`
   padding-top: 8;
   font-size: 16;
-  color: ${colors.black};
+  color: ${colors.white};
   font-weight: 600;
-  border-color: ${({ isFocused }) =>
-    isFocused ? colors.red : colors.darkGray};
+  background-color: ${colors.white};
+  border-color: ${colors.white};
   border-width: 1px;
   border-radius: 8;
   padding-vertical: 6;
@@ -20,8 +20,8 @@ const StyledInput = styled.TextInput`
 `;
 
 const Container = styled.View`
-  width: 88%;
-  padding-horizontal: 8;
+  width: 100%;
+  padding-horizontal: 16;
   margin-bottom: 8;
   position: relative;
   align-self: flex-start;
@@ -31,7 +31,7 @@ const StyledIcon = styled(Icon)`
   position: absolute;
   top: 10;
   z-index: 4;
-  left: 16;
+  left: 24;
 `;
 
 export default class SearchBar extends React.Component {
@@ -45,13 +45,13 @@ export default class SearchBar extends React.Component {
 
     return (
       <Container>
-        <StyledIcon color={colors.mutedGray} name="search" size={16} />
+        <StyledIcon color={colors.offGray} name="search" size={16} />
         <StyledInput
           icon="search"
           isFocused={isFocused}
           onChangeText={onChange}
           placeholder={placeholder}
-          placeholderTextColor={colors.mutedGray}
+          placeholderTextColor={colors.offGray}
           autoCapitalize="none"
           underlineColorAndroid={colors.red}
           selectionColor={colors.black}

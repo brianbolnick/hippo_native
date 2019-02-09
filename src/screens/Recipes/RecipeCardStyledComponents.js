@@ -4,25 +4,46 @@ import { Text, View, Image, TouchableHighlight } from "react-native";
 import SearchBar from "components/SearchBar";
 import Icon from "components/Icon";
 
+export const PageTitle = styled.Text`
+  color: ${colors.white};
+  font-size: 32;
+  font-weight: 700;
+`;
+
+export const FilterLink = styled.Text`
+  color: ${colors.white};
+  font-weight: 500;
+  font-size: 18;
+  margin-top: 8;
+`;
+
+export const HeaderTextContainer = styled.View`
+  flex-direction: row;
+  padding-horizontal: 16;
+  margin-bottom: 8;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 export const DishTypeScroll = styled.ScrollView`
   padding-horizontal: 8;
   padding-bottom: 16;
 `;
 
-export const FilterIcon = styled(Icon)`
-  margin-horizontal: 8;
-  padding-vertical: 3;
-  margin-right: 16;
-`;
-
 export const FiltersContainer = styled.View`
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
   justify-content: space-around;
-  border-bottom-width: 1;
-  border-bottom-color: ${colors.mutedGray};
   padding-bottom: 4;
-  background-color: ${colors.white};
+  background-color: ${colors.red};
+  padding-top: 50px;
+  padding-vertical: 16;
+  margin-bottom: 16;
+  shadow-opacity: 0.2;
+  shadow-radius: 10px;
+  shadow-color: black;
+  shadow-offset: 0px 10px;
+  elevation: 5;
 `;
 
 export const EmptyTextTitle = styled.Text`

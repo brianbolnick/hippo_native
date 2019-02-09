@@ -15,7 +15,10 @@ import {
   CardsContainer,
   FiltersContainer,
   FilterIcon,
-  DishTypeScroll
+  DishTypeScroll,
+  HeaderTextContainer,
+  FilterLink,
+  PageTitle
 } from "./RecipeCardStyledComponents";
 import RecipeCard from "./RecipeCard";
 import { tempRecipes } from "./helper";
@@ -223,7 +226,7 @@ export default class RecipeList extends React.Component {
     const isBeta = recipeMap.length && recipeMap[0].user.is_beta;
 
     return (
-      <View style={{ flex: 1, paddingTop: 50 }}>
+      <View style={{ flex: 1 }}>
         {loading ? (
           <View
             style={{
@@ -247,15 +250,17 @@ export default class RecipeList extends React.Component {
               filtersSet={filtersSet}
             />
             <FiltersContainer>
+              <HeaderTextContainer>
+                <PageTitle>Browse</PageTitle>
+                <FilterLink
+                  onPress={() => this.setModalVisible(!showFilterModal)}
+                >
+                  Filter
+                </FilterLink>
+              </HeaderTextContainer>
               <SearchBar
                 onChange={this.handleSearchChange}
                 placeholder="Search Recipes"
-              />
-              <FilterIcon
-                name="filter"
-                size={28}
-                color={filtersSet ? colors.red : colors.mutedGray}
-                onPress={() => this.setModalVisible(!showFilterModal)}
               />
             </FiltersContainer>
             {!recipes.length && (
