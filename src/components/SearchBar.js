@@ -7,7 +7,7 @@ import Icon from "components/Icon";
 const StyledInput = styled.TextInput`
   padding-top: 8;
   font-size: 16;
-  color: ${colors.white};
+  color: ${colors.black};
   font-weight: 600;
   background-color: ${colors.white};
   border-color: ${colors.white};
