@@ -155,14 +155,13 @@ const Icon = props => {
   return (
     <ContainerComponent {...props}>
       {isCustom ? (
-        <ComponentName {...this.props} />
+        <ComponentName {...props} />
       ) : (
         <Svg
+          style={{ width: "100%", height: "100%" }}
           xmlns="http://www.w3.org/2000/svg"
           viewBox={viewboxSize[name]}
-          width={size}
-          height={size}
-          {...this.props}
+          {...props}
         >
           <G fill={color || "currentColor"}>
             <Path fill={color || "currentColor"} d={icons[name]} />

@@ -7,7 +7,6 @@ import {
   createAppContainer
 } from "react-navigation";
 import Icon from "components/Icon";
-import { IconEdit, IconShare, IconUser } from "components/CustomIcon";
 import * as colors from "utils/Colors";
 import styled from "styled-components";
 import SignUp from "screens/Auth/SignUp";
@@ -124,7 +123,9 @@ export const Recipe = createBottomTabNavigator(
       screen: ShareRecipe,
       navigationOptions: {
         tabBarLabel: "Share",
-        tabBarIcon: ({ tintColor }) => <IconShare size={24} color={tintColor} />
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="share" size={24} color={tintColor} />
+        )
       }
     }
   },

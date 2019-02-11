@@ -9,7 +9,12 @@ export default class IconUser extends Component {
   render() {
     const { size, color } = this.props;
     return (
-      <Icon size={size} viewBoxWidth="76.8" viewBoxHeight="78.9">
+      <Icon
+        size={size}
+        viewBoxWidth="76.8"
+        viewBoxHeight="78.9"
+        {...this.props}
+      >
         <G fill={color || "currentColor"}>
           <Path
             fill={color}

@@ -9,7 +9,12 @@ export default class IconMixer extends Component {
   render() {
     const { size, color } = this.props;
     return (
-      <Icon size={size} viewBoxWidth="75.7" viewBoxHeight="78.4">
+      <Icon
+        size={size}
+        viewBoxWidth="75.7"
+        viewBoxHeight="78.4"
+        {...this.props}
+      >
         <G fill={color || "currentColor"}>
           <Path
             fill={color}

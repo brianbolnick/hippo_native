@@ -9,7 +9,7 @@ export default class IconMessage extends Component {
   render() {
     const { size, color } = this.props;
     return (
-      <Icon size={size} viewBoxWidth="73.9" viewBoxHeight="73.8">
+      <Icon size={size} viewBoxWidth="73.9" viewBoxHeight="73.8" {...this.props}>
         <G fill={color || "currentColor"}>
           <Path
             fill={color}

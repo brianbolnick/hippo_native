@@ -9,7 +9,12 @@ export default class IconShare extends Component {
   render() {
     const { size, color } = this.props;
     return (
-      <Icon size={size} viewBoxWidth="67.1" viewBoxHeight="80.7">
+      <Icon
+        size={size}
+        viewBoxWidth="67.1"
+        viewBoxHeight="80.7"
+        {...this.props}
+      >
         <G fill={color || "currentColor"}>
           <Path
             fill={color}

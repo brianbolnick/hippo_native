@@ -9,7 +9,7 @@ export default class IconDish extends Component {
   render() {
     const { size, color } = this.props;
     return (
-      <Icon size={size} viewBoxWidth="79.6" viewBoxHeight="76">
+      <Icon size={size} viewBoxWidth="79.6" viewBoxHeight="76" {...this.props}>
         <G fill={color || "currentColor"}>
           <Path
             fill={color}

@@ -9,7 +9,7 @@ export default class IconTrash extends Component {
   render() {
     const { size, color } = this.props;
     return (
-      <Icon size={size} viewBoxWidth="73.5" viewBoxHeight="81.6">
+      <Icon size={size} viewBoxWidth="73.5" viewBoxHeight="81.6" {...this.props}>
         <G fill={color || "currentColor"}>
           <Path
             fill={color}
