@@ -3,8 +3,22 @@ import { View, TouchableHighlight } from "react-native";
 import { Svg } from "expo";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import * as CustomIcons from "./";
 
 const { Path, G } = Svg;
+
+const CUSTOM_MAP = {
+  dish: CustomIcons.IconDish,
+  clock: CustomIcons.IconClock,
+  cog: CustomIcons.IconCog,
+  edit: CustomIcons.IconEdit,
+  home: CustomIcons.IconHome,
+  mixer: CustomIcons.IconMixer,
+  message: CustomIcons.IconMessage,
+  share: CustomIcons.IconShare,
+  trash: CustomIcons.IconTrash,
+  user: CustomIcons.IconUser
+};
 
 const icons = {
   chevronDown:
@@ -135,19 +149,28 @@ const PressableContainer = styled.TouchableOpacity`
 const Icon = props => {
   const { color, name, size, onPress } = props;
   const ContainerComponent = onPress ? PressableContainer : Container;
+  const isCustom = CUSTOM_MAP[name];
+  const ComponentName = CUSTOM_MAP[name];
+
+  console.log("HERE!!!!!", name, isCustom);
+
   return (
     <ContainerComponent {...props}>
-      <Svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox={viewboxSize[name]}
-        width={size}
-        height={size}
-        {...this.props}
-      >
-        <G fill={color || "currentColor"}>
-          <Path fill={color || "currentColor"} d={icons[name]} />
-        </G>
-      </Svg>
+      {isCustom ? (
+        <ComponentName {...this.props} />
+      ) : (
+        <Svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox={viewboxSize[name]}
+          width={size}
+          height={size}
+          {...this.props}
+        >
+          <G fill={color || "currentColor"}>
+            <Path fill={color || "currentColor"} d={icons[name]} />
+          </G>
+        </Svg>
+      )}
     </ContainerComponent>
   );
 };

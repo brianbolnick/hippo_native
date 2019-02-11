@@ -7,54 +7,46 @@ import * as colors from "utils/Colors";
 
 const { Path, G } = Svg;
 
-const Container = styled.View`
-  height: ${({ size }) => size || "24"};
-  width: ${({ size }) => size || "24"};
-`;
-const PressableContainer = styled.TouchableOpacity`
-  height: ${({ size }) => size || "24"};
-  width: ${({ size }) => size || "24"};
-`;
-
-export default class Icon extends Component {
+export default class CustomIcon extends Component {
   render() {
     const {
       onPress,
-      size,
       color,
       viewBoxWidth,
       viewBoxHeight,
       children
     } = this.props;
 
-    const ContainerComponent = onPress ? PressableContainer : Container;
-
     return (
-      <ContainerComponent {...this.props}>
-        <Svg
-          onPress={onPress}
-          color={color}
-          height={size}
-          width={size}
-          viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
-          xmlns="http://www.w3.org/2000/svg"
-          {...this.props}
-        >
-          {children}
-        </Svg>
-      </ContainerComponent>
+      <Svg
+        color={color}
+        viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+        aria-hidden="true"
+        data-prefix="fal"
+        role="img"
+        xmlns="http://www.w3.org/2000/svg"
+        onPress={onPress}
+        style={{
+          width: "100%",
+          height: "100%",
+          maxHeight: "100%",
+          maxWidth: "100%"
+        }}
+        {...this.props}
+      >
+        {children}
+      </Svg>
     );
   }
 }
-Icon.propTypes = {
-  size: PropTypes.number.isRequired,
+CustomIcon.propTypes = {
   viewBoxHeight: PropTypes.string,
   viewBoxWidth: PropTypes.string,
   color: PropTypes.string,
   children: PropTypes.node.isRequired
 };
 
-Icon.defaultProps = {
+CustomIcon.defaultProps = {
   color: colors.black,
   viewBoxHeight: "512",
   viewBoxWidth: "512"

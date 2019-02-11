@@ -166,7 +166,9 @@ export const SignedIn = createBottomTabNavigator(
       screen: Profile,
       navigationOptions: {
         tabBarLabel: "Profile",
-        tabBarIcon: ({ tintColor }) => <IconUser size={24} color={tintColor} />
+        tabBarIcon: ({ tintColor }) => (
+          <Icon name="user" size={24} color={tintColor} />
+        )
       }
     }
   },
