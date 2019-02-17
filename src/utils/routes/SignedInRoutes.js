@@ -8,6 +8,7 @@ import RecipeList from "screens/Recipes/RecipeList";
 import NewRecipeEntry from "screens/NewRecipeEntry";
 import Profile from "screens/Profile";
 import Icon from "components/Icon";
+import { NewRecipeRoutes } from "./";
 
 const NewIconView = styled.View`
   background-color: ${colors.red};
@@ -27,7 +28,7 @@ const NewIcon = ({ tintColor, ...rest }) => (
 export default createBottomTabNavigator(
   {
     Recipes: {
-      screen: RecipeList,
+      screen: NewRecipeRoutes,
       navigationOptions: {
         tabBarLabel: "Recipes",
         tabBarIcon: ({ tintColor }) => (

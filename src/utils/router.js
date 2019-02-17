@@ -28,18 +28,9 @@ export const createRootNavigator = (signedIn = false) =>
   createAppContainer(
     createSwitchNavigator(
       {
-        SignedIn: {
-          screen: SignedInRoutes
-        },
-        SignedOut: {
-          screen: SignedOutRoutes
-        },
-        Recipe: {
-          screen: RecipeRoutes
-        },
-        NewRecipeView: {
-          screen: NewRecipeRoutes
-        }
+        SignedIn: { screen: SignedInRoutes },
+        SignedOut: { screen: SignedOutRoutes },
+        Recipe: { screen: RecipeRoutes }
       },
       {
         initialRouteName: signedIn ? "SignedIn" : "SignedOut"

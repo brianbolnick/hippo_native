@@ -8,7 +8,6 @@ import SetPassword from "screens/Auth/SetPassword";
 import FamilyCodeExisting from "screens/Auth/FamilyCodeExisting";
 import NewRecipeEntry from "screens/NewRecipeEntry";
 import { Step1 } from "screens/NewRecipe";
-
 import SignIn from "screens/Auth/SignIn";
 
 const headerStyle = {

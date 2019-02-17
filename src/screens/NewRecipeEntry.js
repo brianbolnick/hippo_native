@@ -51,11 +51,12 @@ class NewRecipeEntry extends React.Component {
           <Button
             label="Next"
             disabled={invalidInput}
-            onPress={() =>
+            onPress={() => {
+              console.log("HERE");
               navigation.navigate("Step1", {
                 name
-              })
-            }
+              });
+            }}
           />
         </ButtonContainer>
       </ScreenContainer>
