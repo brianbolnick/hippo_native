@@ -14,34 +14,44 @@ import {
   Header,
   SubHeader,
   ErrorText
-} from "./NewRecipe/NewRecipeStyledComponents";
+} from "./NewRecipeStyledComponents";
 
 const config = { headers: {} };
 
-class NewRecipeEntry extends React.Component {
+class HowMuch extends React.Component {
   state = {
     name: "",
     error: "",
-    invalidInput: false,
+    invalidInput: true,
     loading: false
+  };
+
+  componentDidMount = () => {
+    const name = this.props.navigation.getParam("name", "");
+    this.setState({ name });
   };
 
   render() {
     const { navigation } = this.props;
-    const { error, name, email, invalidInput } = this.state;
+    const { error, calories, servings, name, invalidInput } = this.state;
 
     return (
       <ScreenContainer behavior="padding">
         <HeaderContainer>
           <SubHeader>Create An Recipe</SubHeader>
-          <Header>What Is It?</Header>
+          <Header>How Much?</Header>
           {error.message && <ErrorText>{error.message}</ErrorText>}
           <KeyboardAvoidingView>
             <Card>
               <Input
-                onChangeText={text => this.setState({ title: text })}
-                label="Title"
-                placeholder="Recipe Name"
+                onChangeText={text => this.setState({ calories: text })}
+                label="Calories"
+                placeholder="Calories"
+              />
+              <Input
+                onChangeText={text => this.setState({ servings: text })}
+                label="Servings"
+                placeholder="Serving Size"
               />
             </Card>
           </KeyboardAvoidingView>
@@ -51,12 +61,18 @@ class NewRecipeEntry extends React.Component {
           <Button
             label="Next"
             disabled={invalidInput}
-            onPress={() => navigation.navigate("HowMuch", { name })}
+            onPress={() =>
+              navigation.navigate("NewAppEntry", {
+                calories,
+                servings,
+                name
+              })
+            }
           />
           <Button
             label="Cancel"
             tertiary
-            onPress={() => navigation.navigate("SignedIn")}
+            onPress={() => navigation.navigate("Create")}
           />
         </ButtonContainer>
       </ScreenContainer>
@@ -64,4 +80,4 @@ class NewRecipeEntry extends React.Component {
   }
 }
 
-export default NewRecipeEntry;
+export default HowMuch;

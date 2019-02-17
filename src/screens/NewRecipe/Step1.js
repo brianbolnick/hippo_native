@@ -18,7 +18,7 @@ import {
 
 const config = { headers: {} };
 
-class Step1 extends React.Component {
+class HowMuch extends React.Component {
   state = {
     name: "",
     error: "",
@@ -62,7 +62,7 @@ class Step1 extends React.Component {
             label="Next"
             disabled={invalidInput}
             onPress={() =>
-              navigation.navigate("NewAppEntry", {
+              navigation.navigate("SignIn", {
                 calories,
                 servings,
                 name
@@ -75,4 +75,4 @@ class Step1 extends React.Component {
   }
 }
 
-export default Step1;
+export default HowMuch;

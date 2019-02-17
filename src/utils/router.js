@@ -30,7 +30,8 @@ export const createRootNavigator = (signedIn = false) =>
       {
         SignedIn: { screen: SignedInRoutes },
         SignedOut: { screen: SignedOutRoutes },
-        Recipe: { screen: RecipeRoutes }
+        Recipe: { screen: RecipeRoutes },
+        NewRecipe: { screen: NewRecipeRoutes }
       },
       {
         initialRouteName: signedIn ? "SignedIn" : "SignedOut"

@@ -7,7 +7,7 @@ import FamilyCodeNew from "screens/Auth/FamilyCodeNew";
 import SetPassword from "screens/Auth/SetPassword";
 import FamilyCodeExisting from "screens/Auth/FamilyCodeExisting";
 import NewRecipeEntry from "screens/NewRecipeEntry";
-import { Step1 } from "screens/NewRecipe";
+import { HowMuch } from "screens/NewRecipe";
 import SignIn from "screens/Auth/SignIn";
 
 const headerStyle = {
@@ -22,49 +22,11 @@ export default createStackNavigator({
       headerTransparent: true
     }
   },
-  Step1: {
-    screen: Step1,
+  HowMuch: {
+    screen: HowMuch,
     navigationOptions: {
       headerStyle,
       headerTransparent: true
-    }
-  },
-
-  FamilyCodeIntro: {
-    screen: FamilyCodeIntro,
-    navigationOptions: {
-      headerStyle,
-      headerTransparent: true
-    }
-  },
-  FamilyCodeNew: {
-    screen: FamilyCodeNew,
-    navigationOptions: {
-      headerStyle,
-      headerTransparent: true
-    }
-  },
-  FamilyCodeExisting: {
-    screen: FamilyCodeExisting,
-    navigationOptions: {
-      headerStyle,
-      headerTransparent: true
-    }
-  },
-  SignUp: {
-    screen: SignUp,
-    navigationOptions: {
-      headerStyle,
-      headerTransparent: true,
-      headerLeft: null
-    }
-  },
-  SignIn: {
-    screen: SignIn,
-    navigationOptions: {
-      headerStyle,
-      headerTransparent: true,
-      headerLeft: null
     }
   }
 });
