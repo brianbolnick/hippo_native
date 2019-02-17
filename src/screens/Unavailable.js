@@ -57,27 +57,37 @@ const StyledButton = styled(Button)`
   margin-vertical: 16;
 `;
 
-export default ({ navigation }) => (
-  <ScreenContainer behavior="padding" style={styles.container}>
-    <LogoContainer>
-      <StyledText>Coming Soon</StyledText>
-      <StyledSubText>
-        This feature isn't available in the app yet, but it is on the web
-        version.
-      </StyledSubText>
-    </LogoContainer>
-    <FormContainer>
-      <Card>
-        <ButtonContainer>
-          <StyledButton
-            label="Visit Web"
-            onPress={() => Linking.openURL("https://hungryhippo.app")}
-          />
-        </ButtonContainer>
-      </Card>
-    </FormContainer>
-  </ScreenContainer>
-);
+class Unavailable extends React.Component {
+  componentDidMount = () => {
+    //TODO: Remove this at some point cuz its hacky AF
+    this.props.navigation.navigate("NewRecipeView");
+  };
+
+  render() {
+    const { navigation } = this.props;
+    return (
+      <ScreenContainer behavior="padding" style={styles.container}>
+        <LogoContainer>
+          <StyledText>Coming Soon</StyledText>
+          <StyledSubText>
+            This feature isn't available in the app yet, but it is on the web
+            version.
+          </StyledSubText>
+        </LogoContainer>
+        <FormContainer>
+          <Card>
+            <ButtonContainer>
+              <StyledButton
+                label="Visit Web"
+                onPress={() => Linking.openURL("https://hungryhippo.app")}
+              />
+            </ButtonContainer>
+          </Card>
+        </FormContainer>
+      </ScreenContainer>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -88,3 +98,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-around"
   }
 });
+
+export default Unavailable;
