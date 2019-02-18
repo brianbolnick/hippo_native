@@ -11,11 +11,9 @@ import CenterView from "./CenterView";
 import * as colors from "utils/Colors";
 
 const iconList = [
-  "dish",
-  "mixer",
-  "share",
-  "trash",
   "addRecipe",
+  "american",
+  "asian",
   "book",
   "checkCircle",
   "checkOpenCircle",
@@ -28,35 +26,68 @@ const iconList = [
   "close",
   "closeOpenCircle",
   "cog",
+  "dish",
   "edit",
   "envelope",
+  "family",
   "filter",
+  "fruit",
   "heartbeat",
   "home",
   "info",
+  "italian",
+  "list",
   "lock",
   "menu",
   "message",
+  "mexican",
+  "mixer",
   "new",
   "plus",
   "profile",
   "search",
+  "share",
   "signin",
   "star",
   "tags",
+  "trash",
   "unlock",
   "upload",
   "user",
   "users",
-  "utensils",
-  "american",
-  "asian",
-  "italian",
-  "fruit",
-  "mexican",
-  "list",
-  "family"
+  "utensils"
 ];
+
+//TODO: OTHERS!
+/*
+ * Japanese
+ * Asian -> Chinese
+ * Fusion -> Chinese
+ * Indian
+ * Thai
+ * Vietnamese
+ * Vegetarian
+ * BBQ
+ * Brazilian
+ * British
+ * Korean
+ * Greek
+ * French
+ * Seafood
+ * Middle Eastern
+ *
+ *
+ * DISH TYPES:
+ * Beverage - martini glass thing
+ * Soup: dish
+ * Appetizer - Cheese
+ * Main - chicken or chicken leg
+ * Side: Corn?
+ * Dessert - Donut or ice cream
+ * Salad - leaf
+ * Breakfast - eggs
+ * bread - bread
+ */
 
 const IconLabel = styled.Text`
   margin: 0 0 10px 0;
