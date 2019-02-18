@@ -18,8 +18,15 @@ const CUSTOM_MAP = {
   message: CustomIcons.IconMessage,
   share: CustomIcons.IconShare,
   trash: CustomIcons.IconTrash,
+  user: CustomIcons.IconUser,
   american: CustomIcons.IconAmerican,
-  user: CustomIcons.IconUser
+  asian: CustomIcons.IconAsian,
+  italian: CustomIcons.IconItalian,
+  fruit: CustomIcons.IconFruit,
+  mexican: CustomIcons.IconMexican,
+  list: CustomIcons.IconList,
+  profile: CustomIcons.IconProfile,
+  family: CustomIcons.IconFamily
 };
 
 const icons = {

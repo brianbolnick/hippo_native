@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Svg } from "expo";
 import Icon from "../CustomIcon";
+import * as colors from "utils/Colors";
 
 const { Path, G } = Svg;
 
