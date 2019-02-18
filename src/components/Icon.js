@@ -4,6 +4,7 @@ import { Svg } from "expo";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import * as CustomIcons from "./CustomIcon";
+import * as colors from "utils/Colors";
 
 const { Path, G } = Svg;
 
@@ -17,6 +18,7 @@ const CUSTOM_MAP = {
   message: CustomIcons.IconMessage,
   share: CustomIcons.IconShare,
   trash: CustomIcons.IconTrash,
+  american: CustomIcons.IconAmerican,
   user: CustomIcons.IconUser
 };
 
@@ -163,8 +165,8 @@ const Icon = props => {
           viewBox={viewboxSize[name]}
           {...props}
         >
-          <G fill={color || "currentColor"}>
-            <Path fill={color || "currentColor"} d={icons[name]} />
+          <G fill={color || colors.black}>
+            <Path fill={color || colors.black} d={icons[name]} />
           </G>
         </Svg>
       )}
