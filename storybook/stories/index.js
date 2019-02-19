@@ -15,6 +15,8 @@ const iconList = [
   "american",
   "asian",
   "book",
+  "bread",
+  "cheese",
   "checkCircle",
   "checkOpenCircle",
   "chevronDown",
@@ -27,6 +29,7 @@ const iconList = [
   "closeOpenCircle",
   "cog",
   "dish",
+  "drink",
   "edit",
   "envelope",
   "family",
@@ -55,7 +58,11 @@ const iconList = [
   "upload",
   "user",
   "users",
-  "utensils"
+  "utensils",
+  "main",
+  "dessert",
+  "salad",
+  "breakfast"
 ];
 
 //TODO: OTHERS!
