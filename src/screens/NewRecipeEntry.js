@@ -13,7 +13,9 @@ import {
   HeaderContainer,
   Header,
   SubHeader,
-  ErrorText
+  ErrorText,
+  NavigationView,
+  CancelIcon
 } from "./NewRecipe/NewRecipeStyledComponents";
 
 const config = { headers: {} };
@@ -32,6 +34,9 @@ class NewRecipeEntry extends React.Component {
 
     return (
       <ScreenContainer behavior="padding">
+        <NavigationView>
+          <CancelIcon navigation={navigation} />
+        </NavigationView>
         <HeaderContainer>
           <SubHeader>Create An Recipe</SubHeader>
           <Header>What Is It?</Header>

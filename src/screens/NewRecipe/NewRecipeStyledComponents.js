@@ -1,7 +1,32 @@
 import React from "react";
 import styled from "styled-components";
-import { View, Text } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import * as colors from "utils/Colors";
+import Icon from "components/Icon";
+
+export const CancelIconContainer = styled.TouchableOpacity`
+  align-self: flex-end;
+`;
+
+export const CancelIcon = navigation => {
+  return (
+    <CancelIconContainer
+      onPress={() => {
+        console.log("navigate!", navigation);
+        navigation.navigate("SignedIn");
+      }}
+    >
+      <Icon name="close" color={colors.red} size={32} />
+    </CancelIconContainer>
+  );
+};
+
+export const NavigationView = styled.View`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+`;
 
 export const LogoContainer = styled.View`
   align-items: center;
@@ -21,9 +46,8 @@ export const ButtonContainer = styled.View`
 
 export const ScreenContainer = styled.View`
   flex: 1;
-  padding-vertical: 50;
+  padding-vertical: 48;
   padding-horizontal: 24;
-  justify-content: space-around;
 `;
 
 export const Card = styled.View`

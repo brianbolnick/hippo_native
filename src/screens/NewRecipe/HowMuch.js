@@ -13,7 +13,9 @@ import {
   HeaderContainer,
   Header,
   SubHeader,
-  ErrorText
+  ErrorText,
+  NavigationView,
+  CancelIcon
 } from "./NewRecipeStyledComponents";
 
 const config = { headers: {} };
@@ -36,7 +38,11 @@ class HowMuch extends React.Component {
     const { error, calories, servings, name, invalidInput } = this.state;
 
     return (
-      <ScreenContainer behavior="padding">
+      <ScreenContainer behavior="padding" style={{ position: "relative" }}>
+        <NavigationView>
+          <CancelIcon navigation={navigation} />
+        </NavigationView>
+
         <HeaderContainer>
           <SubHeader>Create An Recipe</SubHeader>
           <Header>How Much?</Header>

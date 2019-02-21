@@ -37,7 +37,7 @@ export default createBottomTabNavigator(
       }
     },
     Create: {
-      screen: NewRecipeEntry,
+      screen: props => props.navigation.navigate("NewRecipeEntry"),
       navigationOptions: {
         tabBarLabel: "Create",
         tabBarIcon: ({ tintColor }) => (
