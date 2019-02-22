@@ -13,16 +13,18 @@ import {
   HeaderContainer,
   Header,
   SubHeader,
-  ErrorText
+  ErrorText,
+  NavigationView,
+  CancelIcon
 } from "./NewRecipeStyledComponents";
 
 const config = { headers: {} };
 
-class HowMuch extends React.Component {
+class HowIsItMade extends React.Component {
   state = {
     name: "",
     error: "",
-    invalidInput: true,
+    invalidInput: false,
     loading: false
   };
 
@@ -36,10 +38,10 @@ class HowMuch extends React.Component {
     const { error, calories, servings, name, invalidInput } = this.state;
 
     return (
-      <ScreenContainer behavior="padding">
+      <ScreenContainer behavior="padding" style={{ position: "relative" }}>
         <HeaderContainer>
           <SubHeader>Create An Recipe</SubHeader>
-          <Header>How Much?</Header>
+          <Header>How Is It Made?</Header>
           {error.message && <ErrorText>{error.message}</ErrorText>}
           <KeyboardAvoidingView>
             <Card>
@@ -62,12 +64,17 @@ class HowMuch extends React.Component {
             label="Next"
             disabled={invalidInput}
             onPress={() =>
-              navigation.navigate("SignIn", {
+              navigation.navigate("WhatDoesItLookLike", {
                 calories,
                 servings,
                 name
               })
             }
+          />
+          <Button
+            label="Cancel"
+            tertiary
+            onPress={() => navigation.navigate("SignedIn")}
           />
         </ButtonContainer>
       </ScreenContainer>
@@ -75,4 +82,4 @@ class HowMuch extends React.Component {
   }
 }
 
-export default HowMuch;
+export default HowIsItMade;

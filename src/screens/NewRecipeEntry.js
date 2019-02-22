@@ -34,9 +34,6 @@ class NewRecipeEntry extends React.Component {
 
     return (
       <ScreenContainer behavior="padding">
-        <NavigationView>
-          <CancelIcon navigation={navigation} />
-        </NavigationView>
         <HeaderContainer>
           <SubHeader>Create An Recipe</SubHeader>
           <Header>What Is It?</Header>

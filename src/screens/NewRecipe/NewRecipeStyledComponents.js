@@ -6,16 +6,12 @@ import Icon from "components/Icon";
 
 export const CancelIconContainer = styled.TouchableOpacity`
   align-self: flex-end;
+  margin-bottom: 20;
 `;
 
-export const CancelIcon = navigation => {
+export const CancelIcon = props => {
   return (
-    <CancelIconContainer
-      onPress={() => {
-        console.log("navigate!", navigation);
-        navigation.navigate("SignedIn");
-      }}
-    >
+    <CancelIconContainer onPress={() => props.navigation.navigate("SignedIn")}>
       <Icon name="close" color={colors.red} size={32} />
     </CancelIconContainer>
   );
@@ -46,8 +42,9 @@ export const ButtonContainer = styled.View`
 
 export const ScreenContainer = styled.View`
   flex: 1;
-  padding-vertical: 48;
+  padding-vertical: 50;
   padding-horizontal: 24;
+  justify-content: space-around;
 `;
 
 export const Card = styled.View`

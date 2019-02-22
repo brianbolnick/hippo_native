@@ -7,7 +7,15 @@ import FamilyCodeNew from "screens/Auth/FamilyCodeNew";
 import SetPassword from "screens/Auth/SetPassword";
 import FamilyCodeExisting from "screens/Auth/FamilyCodeExisting";
 import NewRecipeEntry from "screens/NewRecipeEntry";
-import { HowMuch } from "screens/NewRecipe";
+import {
+  HowMuch,
+  HowLong,
+  WhatsInIt,
+  HowIsItMade,
+  WhatDoesItLookLike,
+  AnythingElse,
+  RecipePreview
+} from "screens/NewRecipe";
 import SignIn from "screens/Auth/SignIn";
 
 const headerStyle = {
@@ -24,6 +32,49 @@ export default createStackNavigator({
   },
   HowMuch: {
     screen: HowMuch,
+    navigationOptions: {
+      headerStyle,
+      headerTransparent: true
+    }
+  },
+  HowLong: {
+    screen: HowLong,
+    navigationOptions: {
+      headerStyle,
+      headerTransparent: true
+    }
+  },
+  WhatsInIt: {
+    screen: WhatsInIt,
+    navigationOptions: {
+      headerStyle,
+      headerTransparent: true
+    }
+  },
+  HowIsItMade: {
+    screen: HowIsItMade,
+    navigationOptions: {
+      headerStyle,
+      headerTransparent: true
+    }
+  },
+
+  WhatDoesItLookLike: {
+    screen: WhatDoesItLookLike,
+    navigationOptions: {
+      headerStyle,
+      headerTransparent: true
+    }
+  },
+  AnythingElse: {
+    screen: AnythingElse,
+    navigationOptions: {
+      headerStyle,
+      headerTransparent: true
+    }
+  },
+  RecipePreview: {
+    screen: RecipePreview,
     navigationOptions: {
       headerStyle,
       headerTransparent: true

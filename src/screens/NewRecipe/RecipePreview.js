@@ -20,7 +20,7 @@ import {
 
 const config = { headers: {} };
 
-class HowMuch extends React.Component {
+class RecipePreview extends React.Component {
   state = {
     name: "",
     error: "",
@@ -41,7 +41,7 @@ class HowMuch extends React.Component {
       <ScreenContainer behavior="padding" style={{ position: "relative" }}>
         <HeaderContainer>
           <SubHeader>Create An Recipe</SubHeader>
-          <Header>How Much?</Header>
+          <Header>Preview</Header>
           {error.message && <ErrorText>{error.message}</ErrorText>}
           <KeyboardAvoidingView>
             <Card>
@@ -64,7 +64,7 @@ class HowMuch extends React.Component {
             label="Next"
             disabled={invalidInput}
             onPress={() =>
-              navigation.navigate("HowLong", {
+              navigation.navigate("SignedIn", {
                 calories,
                 servings,
                 name
@@ -82,4 +82,4 @@ class HowMuch extends React.Component {
   }
 }
 
-export default HowMuch;
+export default RecipePreview;
