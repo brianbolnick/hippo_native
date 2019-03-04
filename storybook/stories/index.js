@@ -7,6 +7,7 @@ import styled from "styled-components";
 import Button from "src/components/Button";
 import Input from "src/components/Input";
 import Icon from "src/components/Icon";
+import DishTypePicker from "src/components/DishTypePicker";
 import CenterView from "./CenterView";
 import * as colors from "utils/Colors";
 
@@ -186,4 +187,15 @@ storiesOf("Icon", module)
     <Container>
       <Icon name="home" onClick={action("click")} color={colors.red} />
     </Container>
+  ));
+
+storiesOf("Dish Type Modal", module)
+  .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+  .add("Default", () => (
+    <DishTypePicker
+      visible={true}
+      onRequestClose={filters => console.log("close", filters)}
+      onApplyFilters={() => console.log("apply")}
+      onCancelRequest={() => console.log("cancel")}
+    />
   ));
