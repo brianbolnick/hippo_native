@@ -191,11 +191,33 @@ storiesOf("Icon", module)
 
 storiesOf("Dish Type Modal", module)
   .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
-  .add("Default", () => (
-    <DishTypePicker
-      visible={true}
-      onRequestClose={filters => console.log("close", filters)}
-      onApplyFilters={() => console.log("apply")}
-      onCancelRequest={() => console.log("cancel")}
-    />
-  ));
+  .add("Default", () => <DishTypePickerParent />);
+
+class DishTypePickerParent extends React.Component {
+  state = { isVisible: false };
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Button
+          onPress={() => this.setState({ isVisible: true })}
+          label="Click Me!"
+        />
+        <DishTypePicker
+          visible={this.state.isVisible}
+          onRequestClose={filters => {
+            console.log("close", filters);
+            this.setState({ isVisible: false });
+          }}
+          onApplyFilters={filters => {
+            console.log("close", filters);
+            this.setState({ isVisible: false });
+          }}
+          onCancelRequest={filters => {
+            console.log("close", filters);
+            this.setState({ isVisible: false });
+          }}
+        />
+      </View>
+    );
+  }
+}
