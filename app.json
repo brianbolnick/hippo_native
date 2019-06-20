@@ -24,17 +24,14 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.brianbolnick.hungryhippo"
     },
     "androidStatusBar": {
       "backgroundColor": "#FE4969"
     },
-		"githubUrl": "https://github.com/brianbolnick/hippo_native",
-		"ios": {
-			"bundleIdentifier": "com.brianbolnick.hungryhippo"
-		},
-		"android": {
-			"package": "com.brianbolnick.hungryhippo"
-		}
-	}
+    "githubUrl": "https://github.com/brianbolnick/hippo_native",
+    "android": {
+      "package": "com.brianbolnick.hungryhippo"
+    }
+  }
 }
