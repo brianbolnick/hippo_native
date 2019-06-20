@@ -4,7 +4,7 @@
     "description": "Recipe Management Application",
     "slug": "hungry_hippo",
     "privacy": "public",
-    "sdkVersion": "30.0.0",
+    "sdkVersion": "33.0.0",
     "platforms": [
       "ios",
       "android"
