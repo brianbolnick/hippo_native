@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { FormLabel, FormInput } from "react-native-elements";
 import styled from "styled-components";
-import { LinearGradient } from "expo";
+import { LinearGradient } from 'expo-linear-gradient';
 import * as colors from "utils/Colors";
 import Button from "components/Button";
 

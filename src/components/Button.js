@@ -5,7 +5,7 @@ import {
   TouchableHighlight,
   ActivityIndicator
 } from "react-native";
-import { LinearGradient, Constants } from "expo";
+import { LinearGradient, Constants } from "expo-linear-gradient";
 import styled from "styled-components";
 import * as colors from "utils/Colors";
 
@@ -76,7 +76,7 @@ const Button = ({
     <LinearGradient
       colors={
         secondary || tertiary
-          ? []
+          ? ["transparent", "transparent"]
           : disabled
           ? colors.disabledGradientArray
           : colors.primaryGradientArray

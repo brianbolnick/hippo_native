@@ -11,7 +11,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import axios from "axios";
 import styled from "styled-components";
-import { LinearGradient } from "expo";
+import { LinearGradient } from 'expo-linear-gradient';
 import * as colors from "utils/Colors";
 import { updateRecipeRating } from "utils/actions";
 import Button from "components/Button";

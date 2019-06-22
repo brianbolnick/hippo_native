@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { Svg } from "expo";
+import Svg, { Path, G } from "react-native-svg";
 import PropTypes from "prop-types";
 import * as colors from "utils/Colors";
-
-const { Path, G } = Svg;
 
 const MAPPINGS = {
   blank:

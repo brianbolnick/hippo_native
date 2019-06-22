@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { View, TouchableHighlight } from "react-native";
-import { Svg } from "expo";
+import Svg, { Path, G } from "react-native-svg";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import * as colors from "utils/Colors";
 
-const { Path, G } = Svg;
+
 
 export default class CustomIcon extends Component {
   render() {

@@ -7,7 +7,7 @@ import {
   KeyboardAvoidingView
 } from "react-native";
 import styled from "styled-components";
-import { LinearGradient } from "expo";
+import { LinearGradient } from 'expo-linear-gradient';
 import Button from "components/Button";
 import * as colors from "utils/Colors";
 

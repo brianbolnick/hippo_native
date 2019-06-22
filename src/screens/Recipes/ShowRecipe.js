@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { Image, View, ScrollView } from "react-native";
+import { Text, Image, View, ScrollView } from "react-native";
 import math from "mathjs";
 import { addRecipe } from "utils/actions";
 import Button from "components/Button";
@@ -53,11 +53,11 @@ class ShowRecipe extends React.Component {
       ingredients.length &&
       ingredients.map((ing, index) => {
         return (
-          <IngredientWrap key={`ingredient|${index}`}>
-            <Ingredient>{`${ing.quantity} ${ing.measurement} ${
-              ing.name
-            }`}</Ingredient>
-          </IngredientWrap>
+          <Text>
+            <IngredientWrap key={`ingredient|${index}`}>
+              <Ingredient>{`${ing.quantity} ${ing.measurement} ${ing.name}`}</Ingredient>
+            </IngredientWrap>
+          </Text>
         );
       })
     );

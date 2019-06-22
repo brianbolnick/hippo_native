@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Icon from "../CustomIcon";
-import { Svg } from "expo";
+import Svg, { Path, G } from "react-native-svg";
 import * as colors from "utils/Colors";
 
-const { Path, G } = Svg;
+
 
 export default class IconItalian extends Component {
   render() {

@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Svg } from "expo";
+import Svg, { Path, G } from "react-native-svg";
 import Icon from "../CustomIcon";
 
-const { Path, G } = Svg;
+
 
 export default class IconShare extends Component {
   render() {
