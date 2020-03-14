@@ -112,9 +112,10 @@ export const Title = styled.Text`
 
 export const MetaData = styled.Text`
   color: ${colors.mutedGray};
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 600;
   letter-spacing: 1px;
+  overflow: hidden;
 `;
 
 export const Footer = styled.View`

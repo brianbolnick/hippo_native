@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -40,30 +40,21 @@ import {
 import ServingsForm from "./ServingsForm";
 const PlaceholderImage = require("images/recipe-placeholder.png");
 
-class ShowRecipe extends React.Component {
-  state = { ingredientsList: [] };
-  componentDidMount = () => {
-    const data = this.props.navigation.getParam("data", {});
-    this.setState({ ingredientsList: data.ingredients });
-    this.props.addRecipe(data);
-  };
+const ShowRecipe = ({ navigation, recipeData }) => {
+  const navData = navigation.getParam("data", {});
 
-  renderIngredients = ingredients => {
-    return (
-      ingredients.length &&
-      ingredients.map((ing, index) => {
-        return (
-          <Text>
-            <IngredientWrap key={`ingredient|${index}`}>
-              <Ingredient>{`${ing.quantity} ${ing.measurement} ${ing.name}`}</Ingredient>
-            </IngredientWrap>
-          </Text>
-        );
-      })
-    );
-  };
+  const [ingredientsList, setIngredientsList] = useState(
+    navData.raw_ingredients
+  );
 
-  renderSteps = steps => {
+  const renderIngredients = () =>
+    ingredientsList.map((ing, index) => (
+      <IngredientWrap key={`ingredient|${ing}`}>
+        <Ingredient>{ing}</Ingredient>
+      </IngredientWrap>
+    ));
+
+  const renderSteps = steps => {
     return (
       steps.length &&
       steps.map((step, index) => {
@@ -77,126 +68,66 @@ class ShowRecipe extends React.Component {
     );
   };
 
-  getQuantityType = quantity => {
-    if (math.fraction(quantity).d === 1) return "number";
-    return "fraction";
-  };
+  const data =
+    Object.keys(recipeData).length > 0
+      ? recipeData
+      : navigation.getParam("data", {});
 
-  calculateQuantity = (quantity, serving, type) => {
-    switch (type) {
-      case "fraction": {
-        const fraction = math.fraction(quantity);
-        const value = math.multiply(fraction, serving);
-        return this.convertImproperFraction(value);
-      }
-      default:
-        return quantity * serving;
-    }
-  };
-
-  updateIngredients = (ingredients, servings) => {
-    return (
-      ingredients.length &&
-      ingredients.map(ing => {
-        const type = this.getQuantityType(ing.quantity);
-        const quantity = this.calculateQuantity(ing.quantity, servings, type);
-        return {
-          ...ing,
-          quantity
-        };
-      })
-    );
-  };
-
-  convertImproperFraction = fraction => {
-    const numerator = fraction.n;
-    const denominator = fraction.d;
-
-    if (numerator % denominator === 0) {
-      return numerator / denominator;
-    }
-
-    const mix = Math.floor(numerator / denominator);
-    const newNumerator = numerator % denominator;
-    return `${this.displayMix(mix)}${newNumerator}/${denominator}`;
-  };
-
-  displayMix = mix => {
-    if (mix) return `${mix} `;
-    return "";
-  };
-
-  handleServingsChange = servings => {
-    const ingredientsList = this.updateIngredients(
-      [...this.props.recipeData.ingredients],
-      servings
-    );
-    this.setState({ ingredientsList });
-  };
-
-  render() {
-    const { navigation, recipeData } = this.props;
-    const { ingredientsList } = this.state;
-    const data =
-      Object.keys(recipeData).length > 0
-        ? recipeData
-        : navigation.getParam("data", {});
-    return (
-      <View style={{ flex: 1, paddingTop: 50 }}>
-        <HeaderContainer style={{ alignItems: "flex-start" }}>
-          <Icon
-            onPress={() => navigation.navigate("Recipes")}
-            name="chevronLeft"
-            size={40}
-            color={colors.red}
-          />
-        </HeaderContainer>
-        <ScrollView
-          contentContainerStyle={{
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            paddingBottom: 32
-          }}
-        >
-          <FamilyName>{data.family.display_name}</FamilyName>
-          <RecipeTitle>{data.title}</RecipeTitle>
-          <Image
-            style={{ width: "100%", height: 300 }}
-            source={data.image_url ? { uri: data.image_url } : PlaceholderImage}
-          />
-          <RecipeContent>
-            <MetaContainer>
-              <CategoryContainer>
-                <Icon name="tags" size={28} color={colors.black} />
-                <TypeContainer>
-                  <Category>{data.category.name}</Category>
-                  <DishType>{data.dish_type.name}</DishType>
-                </TypeContainer>
-              </CategoryContainer>
-              <RatingContainer>
-                <Rating value={data.rating} />
-              </RatingContainer>
-            </MetaContainer>
-            {data.notes && <Details>"{data.notes}"</Details>}
-            <ServingsContainer>
-              <SectionTitle>Ingredients</SectionTitle>
+  return (
+    <View style={{ flex: 1, paddingTop: 50 }}>
+      <HeaderContainer style={{ alignItems: "flex-start" }}>
+        <Icon
+          onPress={() => navigation.navigate("Recipes")}
+          name="chevronLeft"
+          size={40}
+          color={colors.red}
+        />
+      </HeaderContainer>
+      <ScrollView
+        contentContainerStyle={{
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          paddingBottom: 32
+        }}
+      >
+        <FamilyName>{data.family.display_name}</FamilyName>
+        <RecipeTitle>{data.title}</RecipeTitle>
+        <Image
+          style={{ width: "100%", height: 300 }}
+          source={data.image_url ? { uri: data.image_url } : PlaceholderImage}
+        />
+        <RecipeContent>
+          <MetaContainer>
+            <CategoryContainer>
+              <Icon name="tags" size={28} color={colors.black} />
+              <TypeContainer>
+                <Category>{data.category.name}</Category>
+                <DishType>{data.dish_type.name}</DishType>
+              </TypeContainer>
+            </CategoryContainer>
+            <RatingContainer>
+              <Rating value={data.rating} />
+            </RatingContainer>
+          </MetaContainer>
+          {data.notes && <Details>"{data.notes}"</Details>}
+          <ServingsContainer>
+            <SectionTitle>Ingredients</SectionTitle>
+            {/*
               <ServingsForm
                 currentServings={data.servings}
                 onChange={this.handleServingsChange}
               />
-            </ServingsContainer>
-            <IngredientsContainer>
-              {this.renderIngredients(ingredientsList)}
-            </IngredientsContainer>
-            <SectionTitle>Directions</SectionTitle>
-            <StepsContainer>{this.renderSteps(data.steps)}</StepsContainer>
-          </RecipeContent>
-        </ScrollView>
-      </View>
-    );
-  }
-}
+						*/}
+          </ServingsContainer>
+          <IngredientsContainer>{renderIngredients()}</IngredientsContainer>
+          <SectionTitle>Directions</SectionTitle>
+          <StepsContainer>{renderSteps(data.steps)}</StepsContainer>
+        </RecipeContent>
+      </ScrollView>
+    </View>
+  );
+};
 
 const mapStateToProps = state => {
   return { recipeData: state.recipes.recipeData || {} };

@@ -25,10 +25,14 @@ const RecipeCard = ({ data, navigation }) => {
           <Title numberOfLines={1} ellipsizeMode="tail">
             {title}
           </Title>
-          <MetaData>{category.name.toUpperCase()}</MetaData>
+          <MetaData numberOfLines={1} ellipsizeMode="tail">
+            {category.name.toUpperCase()}
+          </MetaData>
         </Content>
         <Footer>
-          <FooterText>{user.name}</FooterText>
+          <FooterText numberOfLines={1} ellipsizeMode="tail">
+            {user.name}
+          </FooterText>
         </Footer>
       </View>
     </Card>

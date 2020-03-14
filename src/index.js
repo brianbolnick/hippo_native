@@ -1,5 +1,5 @@
 import React from "react";
-import { Font } from "expo";
+import * as Font from "expo-font";
 import axios from "axios";
 import axiosMiddleware from "redux-axios-middleware";
 import { Provider } from "react-redux";
