@@ -38,6 +38,7 @@ if (__DEV__) {
 }
 
 export const API_URL = `${backendHost}/api/${apiVersion}`;
+export const GRAPHQL_HOST = `${backendHost}/graphql`;
 
 export const getDataFromAs = async () => {
   return AsyncStorage.multiGet([
@@ -60,7 +61,6 @@ const errorMap = {
 };
 
 export const handleNetworkErrors = err => {
-  console.log("STATUS", err.response.status);
   return (
     errorMap[err.response.status] || `Something unexpected occurred: ${err}`
   );

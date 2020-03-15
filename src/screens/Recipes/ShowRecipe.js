@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Text, Image, View, ScrollView } from "react-native";
 import math from "mathjs";
-import { addRecipe } from "utils/actions";
 import Button from "components/Button";
 import Icon from "components/Icon";
 import Rating from "components/Rating";
@@ -38,26 +37,31 @@ import {
   DishType
 } from "./ShowRecipeStyledComponents";
 import ServingsForm from "./ServingsForm";
+import useRecipeQuery from "./hooks/useRecipeQuery";
 const PlaceholderImage = require("images/recipe-placeholder.png");
 
-const ShowRecipe = ({ navigation, recipeData }) => {
+const ShowRecipe = ({ navigation }) => {
   const navData = navigation.getParam("data", {});
+  const { data, error, loading } = useRecipeQuery({ recipeId: navData.id });
 
-  const [ingredientsList, setIngredientsList] = useState(
-    navData.raw_ingredients
-  );
-
+  if (loading)
+    return (
+      <View>
+        <Text>loading</Text>
+      </View>
+    );
   const renderIngredients = () =>
-    ingredientsList.map((ing, index) => (
+    data.rawIngredients &&
+    data.rawIngredients.map((ing, index) => (
       <IngredientWrap key={`ingredient|${ing}`}>
         <Ingredient>{ing}</Ingredient>
       </IngredientWrap>
     ));
 
-  const renderSteps = steps => {
+  const renderSteps = () => {
     return (
-      steps.length &&
-      steps.map((step, index) => {
+      data.steps.length &&
+      data.steps.map((step, index) => {
         return (
           <StepWrap key={`step|${index}`}>
             <StepNumber>{index + 1}</StepNumber>
@@ -67,11 +71,6 @@ const ShowRecipe = ({ navigation, recipeData }) => {
       })
     );
   };
-
-  const data =
-    Object.keys(recipeData).length > 0
-      ? recipeData
-      : navigation.getParam("data", {});
 
   return (
     <View style={{ flex: 1, paddingTop: 50 }}>
@@ -91,19 +90,19 @@ const ShowRecipe = ({ navigation, recipeData }) => {
           paddingBottom: 32
         }}
       >
-        <FamilyName>{data.family.display_name}</FamilyName>
+        <FamilyName>{data.family.displayName || ""}</FamilyName>
         <RecipeTitle>{data.title}</RecipeTitle>
         <Image
           style={{ width: "100%", height: 300 }}
-          source={data.image_url ? { uri: data.image_url } : PlaceholderImage}
+          source={data.imageUrl ? { uri: data.imageUrl } : PlaceholderImage}
         />
         <RecipeContent>
           <MetaContainer>
             <CategoryContainer>
               <Icon name="tags" size={28} color={colors.black} />
               <TypeContainer>
-                <Category>{data.category.name}</Category>
-                <DishType>{data.dish_type.name}</DishType>
+                <Category>{data.category.name || ""}</Category>
+                <DishType>{data.dishType.name || ""}</DishType>
               </TypeContainer>
             </CategoryContainer>
             <RatingContainer>
@@ -129,14 +128,4 @@ const ShowRecipe = ({ navigation, recipeData }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return { recipeData: state.recipes.recipeData || {} };
-};
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ addRecipe }, dispatch);
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ShowRecipe);
+export default ShowRecipe;

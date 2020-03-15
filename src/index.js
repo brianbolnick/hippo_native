@@ -5,15 +5,20 @@ import axiosMiddleware from "redux-axios-middleware";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import { API_URL, isSignedIn } from "utils";
+import client from "apolloClient";
 import reducer from "utils/reducers";
 import { createRootNavigator } from "utils/router";
+import { ApolloProvider } from "@apollo/react-hooks";
 
-const client = axios.create({
+const axiosClient = axios.create({
   baseURL: API_URL,
   responseType: "json"
 });
 
-const store = createStore(reducer, applyMiddleware(axiosMiddleware(client)));
+const store = createStore(
+  reducer,
+  applyMiddleware(axiosMiddleware(axiosClient))
+);
 
 export default class App extends React.Component {
   constructor(props) {
@@ -51,9 +56,11 @@ export default class App extends React.Component {
 
     const Layout = createRootNavigator(signedIn);
     return (
-      <Provider store={store}>
-        <Layout />
-      </Provider>
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <Layout />
+        </Provider>
+      </ApolloProvider>
     );
   }
 }
